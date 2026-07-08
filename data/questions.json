@@ -1,0 +1,178 @@
+[
+  {
+    "id": "Q01",
+    "question": "What are VFG's practical ideas for the bowl repairs?",
+    "category": "Bowl repair",
+    "raisedBy": "Luke",
+    "owner": "VFG",
+    "due": "Site visit",
+    "status": "To confirm",
+    "notes": "",
+    "impact": "Shapes repair method and Returnable I."
+  },
+  {
+    "id": "Q02",
+    "question": "Which defects are safety-critical vs desirable improvements?",
+    "category": "Safety",
+    "raisedBy": "Luke",
+    "owner": "VFG / Specialist",
+    "due": "Site visit",
+    "status": "To confirm",
+    "notes": "",
+    "impact": "Separates mandatory repair scope from enhancement ideas."
+  },
+  {
+    "id": "Q03",
+    "question": "How would VFG approach cracks over 5 mm and height irregularities over 3 mm?",
+    "category": "Audit priority",
+    "raisedBy": "Tender audit",
+    "owner": "VFG",
+    "due": "Before concept response",
+    "status": "Needs VFG review",
+    "notes": "",
+    "impact": "Priority 1 repair response."
+  },
+  {
+    "id": "Q04",
+    "question": "What coping repairs are likely?",
+    "category": "Audit priority",
+    "raisedBy": "Tender audit",
+    "owner": "VFG",
+    "due": "Before concept response",
+    "status": "Needs VFG review",
+    "notes": "",
+    "impact": "Repair methodology and BOQ review."
+  },
+  {
+    "id": "Q05",
+    "question": "What street elements would broaden use without overbuilding the site?",
+    "category": "Concept design",
+    "raisedBy": "Luke",
+    "owner": "VFG / Joint",
+    "due": "Site visit",
+    "status": "To confirm",
+    "notes": "",
+    "impact": "Supports participation and concept design weighting."
+  },
+  {
+    "id": "Q06",
+    "question": "Where could ledges, rails, manual pads or banks sit while respecting existing flow?",
+    "category": "Layout",
+    "raisedBy": "Luke",
+    "owner": "VFG",
+    "due": "After sketches",
+    "status": "To confirm",
+    "notes": "",
+    "impact": "Feeds concept CAD layout."
+  },
+  {
+    "id": "Q07",
+    "question": "Is drainage a design issue, maintenance issue, or both?",
+    "category": "Drainage",
+    "raisedBy": "Site photos",
+    "owner": "VFG / Specialist",
+    "due": "Site visit",
+    "status": "Open question",
+    "notes": "",
+    "impact": "Important because June photos show water while the audit did not."
+  },
+  {
+    "id": "Q08",
+    "question": "How do the June photos showing standing water change the site assessment?",
+    "category": "Drainage",
+    "raisedBy": "Luke",
+    "owner": "VFG / Specialist",
+    "due": "Site visit",
+    "status": "Open question",
+    "notes": "",
+    "impact": "May affect survey, levels and repair sequencing."
+  },
+  {
+    "id": "Q09",
+    "question": "What survey, levels and service information is needed before CAD gets serious?",
+    "category": "CAD inputs",
+    "raisedBy": "Luke",
+    "owner": "Joint",
+    "due": "After site visit",
+    "status": "To confirm",
+    "notes": "",
+    "impact": "Controls drawing caveats and specialist pathway."
+  },
+  {
+    "id": "Q10",
+    "question": "What is VFG comfortable sketching at tender stage?",
+    "category": "Concept design",
+    "raisedBy": "Luke",
+    "owner": "VFG",
+    "due": "Site visit",
+    "status": "To confirm",
+    "notes": "",
+    "impact": "Defines Luke drafting support boundary."
+  },
+  {
+    "id": "Q11",
+    "question": "What needs RPEQ or specialist confirmation?",
+    "category": "Certification",
+    "raisedBy": "Tender brief",
+    "owner": "VFG / Specialist",
+    "due": "Before submission",
+    "status": "Specialist required",
+    "notes": "",
+    "impact": "Critical to design-and-construct compliance."
+  },
+  {
+    "id": "Q12",
+    "question": "What is excluded from Luke's role?",
+    "category": "Role boundaries",
+    "raisedBy": "Luke",
+    "owner": "Joint",
+    "due": "Before drafting",
+    "status": "To confirm",
+    "notes": "",
+    "impact": "Protects the partnership and keeps claims honest."
+  },
+  {
+    "id": "Q13",
+    "question": "What returnables can each party provide?",
+    "category": "Returnables",
+    "raisedBy": "Section B",
+    "owner": "Joint",
+    "due": "Before bid decision",
+    "status": "To confirm",
+    "notes": "",
+    "impact": "Bid/no-bid decision."
+  },
+  {
+    "id": "Q14",
+    "question": "Who owns pricing, construction methodology, WHS, environmental and QA plans?",
+    "category": "Ownership",
+    "raisedBy": "Luke",
+    "owner": "VFG",
+    "due": "Before submission",
+    "status": "Needs VFG review",
+    "notes": "",
+    "impact": "These should be led by VFG or qualified specialists."
+  },
+  {
+    "id": "Q15",
+    "question": "What would make this a no-bid?",
+    "category": "Decision gate",
+    "raisedBy": "Luke",
+    "owner": "Joint",
+    "due": "Before submission work ramps up",
+    "status": "Open question",
+    "notes": "",
+    "impact": "Avoids wasting effort if core risks cannot be solved."
+  },
+  {
+    "id": "Q16",
+    "question": "What would make this a strong bid?",
+    "category": "Decision gate",
+    "raisedBy": "Luke",
+    "owner": "Joint",
+    "due": "Before submission work ramps up",
+    "status": "Open question",
+    "notes": "",
+    "impact": "Clarifies the winning argument if the team proceeds."
+  }
+]

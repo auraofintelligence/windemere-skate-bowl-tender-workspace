@@ -1,0 +1,110 @@
+[
+  {
+    "id": "A",
+    "name": "Form of Tender",
+    "asks": "Formal tender offer details and signing.",
+    "lead": "VFG / tender lead",
+    "luke": "Can help organise wording and check completeness.",
+    "evidence": "Authorised signer, legal entity details, final offer package.",
+    "nonConforming": "Unsigned, incomplete or inconsistent offer details."
+  },
+  {
+    "id": "B",
+    "name": "Compliance and Declarations",
+    "asks": "Statement of compliance, non-compliance and declarations.",
+    "lead": "VFG / tender lead",
+    "luke": "Can help track exceptions and plain-English notes.",
+    "evidence": "Reviewed tender conditions and specialist/legal input if needed.",
+    "nonConforming": "Unclear exceptions, missing declarations or unsupported compliance claims."
+  },
+  {
+    "id": "C",
+    "name": "Social Responsibility",
+    "asks": "Social benefit and responsibility response.",
+    "lead": "Joint",
+    "luke": "Can draft local/community benefit language for review.",
+    "evidence": "Practical local benefit commitments VFG can actually deliver.",
+    "nonConforming": "Grand claims without delivery pathway."
+  },
+  {
+    "id": "D",
+    "name": "Insurance",
+    "asks": "Required insurance evidence.",
+    "lead": "VFG",
+    "luke": "Can list documents needed.",
+    "evidence": "Certificates of currency and required policy details.",
+    "nonConforming": "Expired, insufficient or missing cover."
+  },
+  {
+    "id": "E",
+    "name": "Licences / Certificates",
+    "asks": "Relevant licences, certificates and qualifications.",
+    "lead": "VFG / Specialist",
+    "luke": "Can build the evidence checklist.",
+    "evidence": "Licences, accreditations, RPEQ or consultant evidence where required.",
+    "nonConforming": "Missing required qualifications or unverified specialist claims."
+  },
+  {
+    "id": "F",
+    "name": "Subcontractors / Subconsultants",
+    "asks": "Nominate subcontractors and consultants.",
+    "lead": "VFG",
+    "luke": "Can maintain the register.",
+    "evidence": "Names, scopes, capability evidence, insurance/licence info.",
+    "nonConforming": "Unclear critical roles or missing specialist pathway."
+  },
+  {
+    "id": "G",
+    "name": "Local Business and Benefit",
+    "asks": "Local benefit response worth 15 percent.",
+    "lead": "Joint",
+    "luke": "Can draft Redlands/SEQ benefit framing.",
+    "evidence": "Actual local suppliers, spend categories and community benefit commitments.",
+    "nonConforming": "Unsupported local benefit promises."
+  },
+  {
+    "id": "H",
+    "name": "Tendered Sum and BOQ",
+    "asks": "Tendered sum and bill of quantities.",
+    "lead": "VFG",
+    "luke": "Can help cross-reference structure, not price.",
+    "evidence": "Final rates, lump sum, BOQ checks, exclusions and assumptions.",
+    "nonConforming": "Arithmetic errors, missing BOQ items, public leakage of pricing."
+  },
+  {
+    "id": "I",
+    "name": "Proposed Concept Design",
+    "asks": "Concept response worth 10 percent.",
+    "lead": "VFG / Joint",
+    "luke": "Can translate VFG design intent into tender-friendly narrative and concept drawings labelled correctly.",
+    "evidence": "VFG sketches, repair method, progression feature intent, signage/fencing notes.",
+    "nonConforming": "Design claims without VFG/specialist confirmation."
+  },
+  {
+    "id": "J",
+    "name": "Experience and Operational Capability",
+    "asks": "Company and project team experience worth 30 percent.",
+    "lead": "VFG",
+    "luke": "Can format capability mapping and case-study prompts.",
+    "evidence": "Project examples, referees, team CVs and relevant delivery history.",
+    "nonConforming": "Unsupported experience claims or missing referees."
+  },
+  {
+    "id": "K",
+    "name": "Program / Methodology / Cashflow",
+    "asks": "Works program, methodology and anticipated cashflow worth 15 percent.",
+    "lead": "VFG",
+    "luke": "Can structure the written methodology from VFG inputs.",
+    "evidence": "Construction sequence, access, hold points, program, resources and cashflow.",
+    "nonConforming": "Unrealistic program or non-specialist methodology claims."
+  },
+  {
+    "id": "L",
+    "name": "QMS / WHSMP / SSEMP",
+    "asks": "Accreditation systems and management plans. Mandatory.",
+    "lead": "VFG / Specialist",
+    "luke": "Can track plan names and required attachments.",
+    "evidence": "Quality, safety and environmental systems and project-specific plans.",
+    "nonConforming": "Missing mandatory management systems or plans."
+  }
+]

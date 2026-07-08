@@ -1,0 +1,138 @@
+[
+  {
+    "id": "T01",
+    "title": "Confirm repo privacy and publication boundary",
+    "status": "To confirm",
+    "owner": "Luke",
+    "due": "Now",
+    "notes": "Public Pages is allowed, but raw tender files and private details stay out."
+  },
+  {
+    "id": "T02",
+    "title": "Confirm VFG contact details to display or keep private",
+    "status": "To confirm",
+    "owner": "VFG / Luke",
+    "due": "Before public sharing",
+    "notes": "Prefer website links, not personal contact details."
+  },
+  {
+    "id": "T03",
+    "title": "Confirm mandatory site inspection attendance",
+    "status": "To confirm",
+    "owner": "VFG / Luke",
+    "due": "RSVP by 2:00 pm Tuesday 14 July 2026",
+    "notes": "Addendum 1 updated the site inspection details."
+  },
+  {
+    "id": "T04",
+    "title": "Confirm addendum signed and returnable",
+    "status": "To confirm",
+    "owner": "Tender lead",
+    "due": "Tender submission",
+    "notes": "Signed Addendum 1 must come back with tender documents."
+  },
+  {
+    "id": "T05",
+    "title": "Review BOQ structure",
+    "status": "Ready to draft",
+    "owner": "VFG",
+    "due": "Before pricing",
+    "notes": "No prices in this public workspace."
+  },
+  {
+    "id": "T06",
+    "title": "Create concept design sketch capture workflow",
+    "status": "Ready to draft",
+    "owner": "Luke / VFG",
+    "due": "After site visit",
+    "notes": "Sketches should be labelled tender concept only."
+  },
+  {
+    "id": "T07",
+    "title": "Draft site visit notes template",
+    "status": "Ready",
+    "owner": "Luke",
+    "due": "Before site visit",
+    "notes": "Printable agenda and note sections are seeded."
+  },
+  {
+    "id": "T08",
+    "title": "Draft role boundaries",
+    "status": "Ready",
+    "owner": "Luke",
+    "due": "Before partnership decision",
+    "notes": "Boundary page separates support from certification."
+  },
+  {
+    "id": "T09",
+    "title": "Build compliance matrix",
+    "status": "Ready",
+    "owner": "Luke",
+    "due": "Before bid decision",
+    "notes": "Initial matrix seeded from prompt and source check."
+  },
+  {
+    "id": "T10",
+    "title": "Draft local benefit and social benefit angle",
+    "status": "Ready to draft",
+    "owner": "Luke / VFG",
+    "due": "Before Returnable G",
+    "notes": "Keep it tender-grounded, not grandiose."
+  },
+  {
+    "id": "T11",
+    "title": "Collect VFG project examples and referees",
+    "status": "Needs VFG review",
+    "owner": "VFG",
+    "due": "Before Returnable J",
+    "notes": "Use VFG-supplied evidence and permissions."
+  },
+  {
+    "id": "T12",
+    "title": "Confirm RPEQ and design consultant pathway",
+    "status": "Needs specialist",
+    "owner": "VFG / Specialist",
+    "due": "Before proceeding",
+    "notes": "Critical design-and-construct requirement."
+  },
+  {
+    "id": "T13",
+    "title": "Confirm survey and service location requirements",
+    "status": "Needs specialist",
+    "owner": "VFG / Specialist",
+    "due": "After site visit",
+    "notes": "Needed before serious CAD."
+  },
+  {
+    "id": "T14",
+    "title": "Draft CAD layer standard",
+    "status": "Ready",
+    "owner": "Luke",
+    "due": "Before CAD sketches",
+    "notes": "Layer list is seeded under cad/."
+  },
+  {
+    "id": "T15",
+    "title": "Draft Returnable I concept response outline",
+    "status": "Ready to draft",
+    "owner": "Luke / VFG",
+    "due": "After concept direction",
+    "notes": "Requires VFG design intent."
+  },
+  {
+    "id": "T16",
+    "title": "Draft Returnable K methodology outline",
+    "status": "Ready to draft",
+    "owner": "VFG / Luke",
+    "due": "After delivery method",
+    "notes": "Construction method must be VFG-led."
+  },
+  {
+    "id": "T17",
+    "title": "Decide bid / no-bid",
+    "status": "Parked / no bid",
+    "owner": "Joint",
+    "due": "Decision gate",
+    "notes": "Only proceed if roles, returnables, pricing and certification pathway are credible."
+  }
+]

@@ -1,0 +1,79 @@
+[
+  {
+    "file": "(Addendum)_PDG-20842-1_Addendum_1.pdf",
+    "purpose": "Updates tender timing and site inspection details.",
+    "notes": "Closing moved to 2:00 pm 6 August 2026. Mandatory site inspection moved to 10:00 am Wednesday 15 July 2026. RSVP by 2:00 pm Tuesday 14 July 2026.",
+    "usedFor": "Dates, attendance, signed addendum task.",
+    "caution": "Do not republish raw PDF or signature page."
+  },
+  {
+    "file": "PDG-20842-1_ITT_Invitation_To_Tender.pdf",
+    "purpose": "Invitation, tender rules, evaluation criteria and lodgement structure.",
+    "notes": "Section A retained by tenderers. Section B deliverables become the tender offer.",
+    "usedFor": "Tender overview, compliance matrix, returnables.",
+    "caution": "Summarise only. Do not publish full tender conditions."
+  },
+  {
+    "file": "PDG-20842-1_Project_Brief.pdf",
+    "purpose": "Technical project brief and design-and-construct scope.",
+    "notes": "Includes staged design, RPEQ for-construction drawings, as-constructed and Form 16 pathway.",
+    "usedFor": "Scope, CAD workflow, specialist boundaries.",
+    "caution": "Do not treat summaries as engineering advice."
+  },
+  {
+    "file": "PDG-20842-1_Section_B_Returnable_Schedule_Attachments.docx",
+    "purpose": "Returnable schedules A-L to complete and lodge.",
+    "notes": "Failure to provide required schedules may make a tender non-conforming.",
+    "usedFor": "Returnables page and compliance matrix.",
+    "caution": "Do not publish filled forms, signatures, prices or private evidence."
+  },
+  {
+    "file": "PDG-20842-1_Bill_of_Quantities.xlsm",
+    "purpose": "BOQ workbook for tendered sum structure.",
+    "notes": "Use for structure only in this workspace. Pricing belongs outside the public site.",
+    "usedFor": "Returnable H planning.",
+    "caution": "Never publish rates, totals or commercial assumptions."
+  },
+  {
+    "file": "Appendix_A-PDG-20842_CIP_Skate_Bowl-Windemere_Road_Park__Alexandra_Hills-Ow (1).pdf",
+    "purpose": "Owner's consent / property-related appendix.",
+    "notes": "Supports site authority context.",
+    "usedFor": "Document register and planning context.",
+    "caution": "Do not publish full property documentation."
+  },
+  {
+    "file": "Appendix_B-2023_Redland_City_Council_Wayfinding_Signage_Manual_Core_Standar (2).pdf",
+    "purpose": "Wayfinding signage core standards.",
+    "notes": "Any signage concept should be RCC-style compliant, accessible, visible and non-hazardous.",
+    "usedFor": "Concept design and signage notes.",
+    "caution": "Do not reproduce manual content heavily."
+  },
+  {
+    "file": "Appendix_C-RCC_Skatepark_Audit_Jan_2026.pdf",
+    "purpose": "Skatepark audit for Windemere Road Park.",
+    "notes": "Condition rating 3 - Fair. Priority actions include cracks/wide joints over 5 mm, height irregularities over 3 mm and coping repairs.",
+    "usedFor": "Repair priorities, site visit questions, concept options.",
+    "caution": "Do not convert audit notes into final design recommendations without VFG/specialist review."
+  },
+  {
+    "file": "Appendix_D-Site_Photos-02_June_2026.pdf",
+    "purpose": "June 2026 site photo pack.",
+    "notes": "Photos show water/pooling, debris, graffiti, cracking and existing shelter/fencing context.",
+    "usedFor": "Drainage questions and site observations.",
+    "caution": "Do not publish raw photos unless approved."
+  },
+  {
+    "file": "Appendix_E-FBD-106_A_Fencing_Welded_Mesh_Fencing_&_Control_Fence.pdf",
+    "purpose": "Welded mesh fencing / control fence detail.",
+    "notes": "Use standard detail as source where fencing is relevant.",
+    "usedFor": "Fencing and ancillary works planning.",
+    "caution": "Concept only until confirmed against standards and site."
+  },
+  {
+    "file": "PDG-20842-1_AS4300-1995_General_Conditions.pdf",
+    "purpose": "General contract conditions.",
+    "notes": "Important for risk review and formal tender/legal review.",
+    "usedFor": "Risk and assumptions.",
+    "caution": "Not legal advice. Do not publish full contract conditions."
+  }
+]

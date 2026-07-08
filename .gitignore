@@ -1,0 +1,20 @@
+# Local tender/source documents stay out of the public repo.
+RequestDocs/
+source-docs/
+source_docs/
+private/
+_private/
+*.pdf
+*.docx
+*.xlsm
+*.xlsx
+*.xls
+*.zip
+
+# Local tooling clutter.
+.DS_Store
+Thumbs.db
+__pycache__/
+.venv/
+node_modules/
+tmp/
