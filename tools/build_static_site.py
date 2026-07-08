@@ -1913,6 +1913,13 @@ def write_pages() -> None:
       ])}
     </section>
 
+    <section class="section warning-box">
+      <h2>Specialist standard to check</h2>
+      <p><strong>AS EN 14974:2021 - Skateparks, safety requirements and test methods</strong> is listed by Standards Australia as the current skatepark safety standard. The store page should be checked by VFG or the design/certification lead before anyone buys it.</p>
+      <p>Standards Australia pricing checked 8 July 2026: Web Reader 1 licence AUD $154.97 incl. GST; hard copy AUD $172.02 incl. GST. Prices can change, and VFG or the specialist consultant may already have access.</p>
+      <p><a class="button-link" href="https://store.standards.org.au/product/as-en-14974-2021" rel="noopener">Open Standards Australia product page</a></p>
+    </section>
+
     <section class="section band tint">
       <h2>Drawing labels</h2>
       {list_items([
