@@ -47,7 +47,7 @@ def extract_appendix_d(pdf_path: Path) -> list[dict[str, str]]:
         _, info = max(candidates, key=lambda item: item[0])
         image = Image.open(io.BytesIO(info["image"]))
         filename = f"windemere-site-{page_index:02d}.jpg"
-        resize_jpeg(image, 1600, output_dir / filename)
+        resize_jpeg(image, 1200, output_dir / filename)
         records.append({
             "src": f"../assets/img/site-photos/{filename}",
             "homeSrc": f"assets/img/site-photos/{filename}",
