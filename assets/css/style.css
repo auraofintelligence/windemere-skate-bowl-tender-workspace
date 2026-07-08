@@ -601,6 +601,66 @@ table {
   min-width: 760px;
 }
 
+.docs-table-wrap {
+  overflow-x: visible;
+}
+
+.docs-table {
+  table-layout: fixed;
+  min-width: 0;
+}
+
+.docs-table th,
+.docs-table td {
+  overflow-wrap: anywhere;
+  word-break: normal;
+  hyphens: auto;
+}
+
+.docs-table th:nth-child(1),
+.docs-table td:nth-child(1) {
+  width: 24%;
+}
+
+.docs-table th:nth-child(2),
+.docs-table td:nth-child(2) {
+  width: 14%;
+}
+
+.docs-table th:nth-child(3),
+.docs-table td:nth-child(3) {
+  width: 22%;
+}
+
+.docs-table th:nth-child(4),
+.docs-table td:nth-child(4) {
+  width: 15%;
+}
+
+.docs-table th:nth-child(5),
+.docs-table td:nth-child(5) {
+  width: 17%;
+}
+
+.docs-table th:nth-child(6),
+.docs-table td:nth-child(6) {
+  width: 8%;
+}
+
+.docs-table .download-cell {
+  text-align: center;
+}
+
+.docs-table .download-link {
+  display: inline-flex;
+  width: min(100%, 7rem);
+  justify-content: center;
+  white-space: normal;
+  line-height: 1.15;
+  padding: 0.45rem 0.5rem;
+  font-size: 0.84rem;
+}
+
 th,
 td {
   text-align: left;
@@ -753,6 +813,49 @@ tbody tr:hover {
   .nav-more-panel {
     left: 0;
     right: auto;
+  }
+}
+
+@media (max-width: 820px) {
+  .docs-table-wrap {
+    overflow-x: visible;
+  }
+
+  .docs-table,
+  .docs-table thead,
+  .docs-table tbody,
+  .docs-table tr,
+  .docs-table th,
+  .docs-table td {
+    display: block;
+    width: 100%;
+  }
+
+  .docs-table thead {
+    display: none;
+  }
+
+  .docs-table tr {
+    border-bottom: 1px solid var(--border);
+    padding: 0.8rem;
+  }
+
+  .docs-table td {
+    border-bottom: 0;
+    padding: 0.4rem 0;
+  }
+
+  .docs-table td::before {
+    content: attr(data-label);
+    display: block;
+    margin-bottom: 0.15rem;
+    color: var(--navy);
+    font-size: 0.78rem;
+    font-weight: 900;
+  }
+
+  .docs-table .download-cell {
+    text-align: left;
   }
 }
 

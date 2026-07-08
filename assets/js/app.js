@@ -99,8 +99,8 @@
     try {
       const rows = await loadJson(mount.dataset.docsSrc);
       mount.innerHTML = `
-        <div class="table-wrap">
-          <table>
+        <div class="table-wrap docs-table-wrap">
+          <table class="docs-table">
             <thead>
               <tr>
                 <th scope="col">File name</th>
@@ -114,12 +114,12 @@
             <tbody>
               ${rows.map((row) => `
                 <tr>
-                  <td>${escapeHtml(row.file)}</td>
-                  <td>${escapeHtml(row.purpose)}</td>
-                  <td>${escapeHtml(row.notes)}</td>
-                  <td>${escapeHtml(row.usedFor)}</td>
-                  <td>${escapeHtml(row.caution)}</td>
-                  <td>${row.downloadPath ? `<a class="download-link" href="${escapeHtml(row.downloadPath)}" download>Download</a>` : ""}</td>
+                  <td data-label="File name">${escapeHtml(row.file)}</td>
+                  <td data-label="Purpose">${escapeHtml(row.purpose)}</td>
+                  <td data-label="Key notes">${escapeHtml(row.notes)}</td>
+                  <td data-label="Used for">${escapeHtml(row.usedFor)}</td>
+                  <td data-label="Public/private caution">${escapeHtml(row.caution)}</td>
+                  <td data-label="Download" class="download-cell">${row.downloadPath ? `<a class="download-link" href="${escapeHtml(row.downloadPath)}" download>Download</a>` : ""}</td>
                 </tr>`).join("")}
             </tbody>
           </table>

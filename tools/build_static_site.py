@@ -22,6 +22,7 @@ NAV = [
     ("pages/strange-but-true-role.html", "Luke role"),
     ("pages/role-boundaries.html", "Boundaries"),
     ("pages/compliance-matrix.html", "Compliance matrix"),
+    ("pages/project-brief-coverage.html", "Brief coverage"),
     ("pages/returnables.html", "Returnables"),
     ("pages/concept-design-workspace.html", "Concept design"),
     ("pages/cad-workflow.html", "CAD workflow"),
@@ -967,6 +968,66 @@ table {
   min-width: 760px;
 }
 
+.docs-table-wrap {
+  overflow-x: visible;
+}
+
+.docs-table {
+  table-layout: fixed;
+  min-width: 0;
+}
+
+.docs-table th,
+.docs-table td {
+  overflow-wrap: anywhere;
+  word-break: normal;
+  hyphens: auto;
+}
+
+.docs-table th:nth-child(1),
+.docs-table td:nth-child(1) {
+  width: 24%;
+}
+
+.docs-table th:nth-child(2),
+.docs-table td:nth-child(2) {
+  width: 14%;
+}
+
+.docs-table th:nth-child(3),
+.docs-table td:nth-child(3) {
+  width: 22%;
+}
+
+.docs-table th:nth-child(4),
+.docs-table td:nth-child(4) {
+  width: 15%;
+}
+
+.docs-table th:nth-child(5),
+.docs-table td:nth-child(5) {
+  width: 17%;
+}
+
+.docs-table th:nth-child(6),
+.docs-table td:nth-child(6) {
+  width: 8%;
+}
+
+.docs-table .download-cell {
+  text-align: center;
+}
+
+.docs-table .download-link {
+  display: inline-flex;
+  width: min(100%, 7rem);
+  justify-content: center;
+  white-space: normal;
+  line-height: 1.15;
+  padding: 0.45rem 0.5rem;
+  font-size: 0.84rem;
+}
+
 th,
 td {
   text-align: left;
@@ -1119,6 +1180,49 @@ tbody tr:hover {
   .nav-more-panel {
     left: 0;
     right: auto;
+  }
+}
+
+@media (max-width: 820px) {
+  .docs-table-wrap {
+    overflow-x: visible;
+  }
+
+  .docs-table,
+  .docs-table thead,
+  .docs-table tbody,
+  .docs-table tr,
+  .docs-table th,
+  .docs-table td {
+    display: block;
+    width: 100%;
+  }
+
+  .docs-table thead {
+    display: none;
+  }
+
+  .docs-table tr {
+    border-bottom: 1px solid var(--border);
+    padding: 0.8rem;
+  }
+
+  .docs-table td {
+    border-bottom: 0;
+    padding: 0.4rem 0;
+  }
+
+  .docs-table td::before {
+    content: attr(data-label);
+    display: block;
+    margin-bottom: 0.15rem;
+    color: var(--navy);
+    font-size: 0.78rem;
+    font-weight: 900;
+  }
+
+  .docs-table .download-cell {
+    text-align: left;
   }
 }
 
@@ -1321,8 +1425,8 @@ tbody tr:hover {
     try {
       const rows = await loadJson(mount.dataset.docsSrc);
       mount.innerHTML = `
-        <div class="table-wrap">
-          <table>
+        <div class="table-wrap docs-table-wrap">
+          <table class="docs-table">
             <thead>
               <tr>
                 <th scope="col">File name</th>
@@ -1336,12 +1440,12 @@ tbody tr:hover {
             <tbody>
               ${rows.map((row) => `
                 <tr>
-                  <td>${escapeHtml(row.file)}</td>
-                  <td>${escapeHtml(row.purpose)}</td>
-                  <td>${escapeHtml(row.notes)}</td>
-                  <td>${escapeHtml(row.usedFor)}</td>
-                  <td>${escapeHtml(row.caution)}</td>
-                  <td>${row.downloadPath ? `<a class="download-link" href="${escapeHtml(row.downloadPath)}" download>Download</a>` : ""}</td>
+                  <td data-label="File name">${escapeHtml(row.file)}</td>
+                  <td data-label="Purpose">${escapeHtml(row.purpose)}</td>
+                  <td data-label="Key notes">${escapeHtml(row.notes)}</td>
+                  <td data-label="Used for">${escapeHtml(row.usedFor)}</td>
+                  <td data-label="Public/private caution">${escapeHtml(row.caution)}</td>
+                  <td data-label="Download" class="download-cell">${row.downloadPath ? `<a class="download-link" href="${escapeHtml(row.downloadPath)}" download>Download</a>` : ""}</td>
                 </tr>`).join("")}
             </tbody>
           </table>
@@ -1642,6 +1746,7 @@ def write_pages() -> None:
       <h2>Dashboard</h2>
       <div class="grid">
         {card("Tender snapshot", "PDG-20842-1 asks for design-and-construct refurbishment of the Windemere Road Park skate bowl, including repair, new elements, ancillary works, certification and management plans.", "Tender fact", "pages/tender-overview.html")}
+        {card("Project Brief coverage", "The first audit says the workspace covers the tender skeleton, but several Project Brief controls still need a stronger register or VFG/specialist confirmation.", "New audit", "pages/project-brief-coverage.html")}
         {card("Site visit next step", "Working assumption: mandatory site inspection at 10:00 am Wednesday 15 July 2026. RSVP by 2:00 pm Tuesday 14 July 2026.", "To confirm", "pages/site-visit.html")}
         {card("Actual site photos", "Appendix D photos are now included as web images so drainage, cracking, debris, shelter and fencing context can be reviewed directly.", "Source imagery", "pages/site-photos.html")}
         {card("Partnership status", "Luke, Paolo and Kieran are testing fit. The workspace should help the team proceed, pause or no-bid respectfully.", "Exploratory", "pages/partnership.html")}
@@ -1724,6 +1829,7 @@ def write_pages() -> None:
         "BOQ and tendered sum completed outside this public workspace.",
         "Certificates of currency, insurances, licences and management plans checked.",
         "RPEQ, survey, service locating, Safety in Design, as-constructed, ADAC and Form 16 pathway confirmed.",
+        "Project Brief coverage page reviewed for the deeper codes, controls, hold points and handover requirements.",
       ])}
     </section>
     """
@@ -1932,6 +2038,100 @@ def write_pages() -> None:
     """
     write("pages/role-boundaries.html", layout("pages/role-boundaries.html", "Role boundaries", "A clear, humble boundary page so the tender support stays practical and honest.", boundaries))
 
+    brief_covered_rows = [
+        ["Tender admin and source pack", "Document register, ZIP download, addendum notes and site map are in place.", badge("Covered", "gum"), "Keep current if RCC issues further addenda."],
+        ["Returnables A-L", "Section B returnables are mapped in plain English with likely owners.", badge("Covered", "gum"), "Still requires filled private forms and VFG evidence."],
+        ["Role boundaries", "Luke/VFG/specialist boundaries are explicit, including AS EN 14974 and RPEQ limits.", badge("Covered", "gum"), "Good public-facing guardrail."],
+        ["Site photos and audit issues", "Appendix D images and Appendix C audit themes are visible for site discussion.", badge("Covered", "gum"), "Need VFG to convert observations into technical response."],
+        ["Main design stages", "Stage 1-4, RPEQ, permits, service locating, Safety in Design and ADAC/Form 16 are in the compliance matrix.", badge("Covered at high level", "gum"), "High-level only, not a full deliverables register yet."],
+        ["Public/private separation", "Pricing, signatures, filled returnables and private submission material are clearly excluded from the public site.", badge("Covered", "gum"), "Keep this discipline."],
+    ]
+
+    brief_thin_rows = [
+        ["Codes governing work", "The site mentions AS EN 14974 and specialist standards, but the full codes list was not yet tracked.", badge("Thin", "dark"), "Added a codes register below. VFG/specialist must confirm applicability."],
+        ["Cultural heritage duty of care", "Project Brief requires ACHA duty of care, procedures, stop-work response and staff acknowledgement.", badge("Thin", "dark"), "Needs a named contractor-side action."],
+        ["Design drawing and data standards", "CAD page exists, but AS1100, A3/A1 title block, DWG/xref packs, 12D and RCC coordinate requirements need stronger treatment.", badge("Thin", "dark"), "Add to CAD workflow before drafting final outputs."],
+        ["Permit and application pathway", "Permits are noted, but the detailed permit report, applicant/landowner confirmation, lodgement, fees and hold points need a checklist.", badge("Thin", "dark"), "VFG/specialist owned."],
+        ["SSQMP, WHSMP and SSEMP", "Management plans are visible as mandatory, but the Project Brief lists contents, examples, final acceptance and on-site storage requirements.", badge("Thin", "dark"), "Needs plan evidence pack from VFG."],
+        ["Koala habitat and environmental controls", "Risk page mentions it, but the stop-work triggers and Redlands Wildlife Rescue contact are not yet unpacked.", badge("Thin", "dark"), "Add to SSEMP questions."],
+        ["Wayfinding and construction signage", "Appendix B is downloadable, but the site does not yet have a wayfinding/signage checklist.", badge("Thin", "dark"), "Use RCC manual plus Project Brief public notification section."],
+        ["Fencing and site security", "Appendix E is downloadable, but temporary fencing, no-advertising rule and control-fence details are not mapped.", badge("Thin", "dark"), "Add construction controls if bidding proceeds."],
+        ["Practical completion and handover", "Final deliverables are mentioned, but the full hard copy/electronic copy, manuals, warranties, Form 15/16/21 and as-constructed detail is not fully itemised.", badge("Thin", "dark"), "Needs a closeout checklist."],
+    ]
+
+    brief_missing_rows = [
+        ["Detailed Project Brief clause register", "The current matrix is useful but not clause-by-clause.", badge("Missing", "warning"), "Create only if the team proceeds to serious submission work."],
+        ["Technical data sheet and warranty register", "Project Brief calls out product data sheets, manuals, guarantees, warranties and maintenance schedules.", badge("Missing", "warning"), "VFG/suppliers to provide."],
+        ["Design option comparison report", "If multiple design options are offered, the brief asks for limitations, benefits and suitability comparison.", badge("Missing", "warning"), "Needed if Options A/B/C stay in play."],
+        ["Testing and inspection register", "Brief includes tests, hold points, inspections, notices and potential SAA/BSI test requirements.", badge("Missing", "warning"), "Specialist/contractor register."],
+        ["Dilapidation survey method detail", "Pre/post survey is listed, but the crack gauges, photos, adjoining areas and endorsed copies are not fully broken out.", badge("Missing detail", "warning"), "Survey/contractor owned."],
+        ["Laydown, visual impact, noise and traffic controls", "Brief includes detailed site rules, delivery timing, parking, footpath signage and water tanker filling station rules.", badge("Missing", "warning"), "Construction methodology/WHSMP input."],
+        ["Turf, fireweed and tree protection detail", "Brief includes turf supply/placement, maintenance period, fireweed guarantee and AS4970 tree protection zones.", badge("Missing detail", "warning"), "Landscape/specialist input."],
+        ["Defects and final completion pathway", "52-week defects period and final certificate process need their own handover/closeout notes.", badge("Missing detail", "warning"), "Contractor/program owner."],
+    ]
+
+    code_rows = [
+        ["Aboriginal Cultural Heritage Act 2003", "Duty of care, staff procedures, stop-work response and notification pathway.", "Project Brief section 4", badge("Needs owner", "warning")],
+        ["AS EN 14974:2021 Skateparks", "Skatepark safety requirements and test methods.", "Project Brief sections 3 and 1", badge("Specialist", "warning")],
+        ["Building Act 1975 and building codes", "Building application, decision notices, certification and permits.", "Project Brief sections 3, 6.3 and 12", badge("Specialist", "warning")],
+        ["Queensland Environmental Protection Act 1994 and Regulations 2008", "SSEMP, environmental due diligence and harm controls.", "Project Brief sections 3 and 7.3", badge("Plan evidence", "dark")],
+        ["Work Health and Safety Act 2011 and Regulation 2011", "Principal Contractor duties, WHSMP, PPE, site traffic and high-risk work controls.", "Project Brief sections 3 and 7.2", badge("VFG / contractor", "dark")],
+        ["AS4970-2009 Protection of trees on development sites", "Tree protection zones, restricted activities and arborist advice.", "Project Brief sections 3 and 11.9", badge("Needs detail", "warning")],
+        ["AS1428 Design for access and mobility", "Access and mobility implications for public use and paths.", "Project Brief section 3", badge("Needs review", "warning")],
+        ["AS1726 Geotechnical Site Investigations", "Geotech investigations and testing for design certification.", "Project Brief sections 3 and 6.1", badge("Specialist", "warning")],
+        ["AS 4685 SET:2021 Playground equipment and surfacing Set", "Surfacing/play equipment relevance to be confirmed for skatepark elements.", "Project Brief section 3", badge("Needs review", "warning")],
+        ["AS 4419-2003 Soils for Landscaping and Garden Use", "Topsoil and landscape soil suitability.", "Project Brief section 3 and landscape works", badge("Needs detail", "warning")],
+        ["AS 1289.D1.1-1977 Methods of Testing Soil for Engineering Purposes", "Soil testing method reference.", "Project Brief section 3", badge("Specialist", "warning")],
+        ["AS 4454-2012 Composts, Soil Conditioners and Mulches", "Landscape material quality.", "Project Brief section 3", badge("Needs detail", "warning")],
+        ["AS 2303:2018 Tree Stock for Landscaping Use", "Tree stock quality if planting is required.", "Project Brief section 3", badge("Needs detail", "warning")],
+        ["Plumbing and Drainage Act 2018", "Drainage/plumbing permits and compliance pathway.", "Project Brief section 3", badge("Specialist", "warning")],
+        ["Standards Association of Australia codes and guidelines", "Any other applicable SAA standards for components of the work.", "Project Brief section 3", badge("Needs specialist review", "warning")],
+        ["Industry regulations, manuals and codes of practice", "Recognised manuals, codes and supplier requirements.", "Project Brief section 3", badge("Needs register", "warning")],
+        ["Product technical data sheets and warranties", "Product datasheets, limitations, benefits, suitability and warranty requirements.", "Project Brief section 3 and 12", badge("Missing register", "warning")],
+        ["Redland City Plan policies, infrastructure plans, codes, schedules and standard drawings", "Local government design, ASCON and infrastructure requirements.", "Project Brief sections 3 and 12", badge("Needs review", "warning")],
+    ]
+
+    brief_coverage = f"""
+    <section class="section warning-box">
+      <h2>Quick answer</h2>
+      <p>No, not fully yet. The site covers the tender skeleton, the supplied documents, the major returnables, the role boundaries and the first specialist gates. The Project Brief adds a deeper contractor-control layer that still needs a stronger register if the team decides to bid.</p>
+      <p>The good news: the missing pieces are mostly trackable. They are not things Luke should personally certify. They are VFG, RPEQ, survey, certifier, WHS, environmental, landscape and contractor-delivery items that need to be called out early.</p>
+    </section>
+
+    <section class="section grid three">
+      <article class="card"><h3>Covered enough to start</h3><p>Admin, documents, returnables, source photos, role boundaries and big specialist warnings are in place.</p></article>
+      <article class="card"><h3>Thin</h3><p>The governing codes, management plans, permits, signage, fencing, handover and technical registers need more explicit tracking.</p></article>
+      <article class="card"><h3>Missing detail</h3><p>A serious submission should add clause-level controls, product data sheets, tests, hold points, turf/tree details and closeout obligations.</p></article>
+    </section>
+
+    <section class="section">
+      <h2>Covered enough to start</h2>
+      {table(["Project Brief area", "Current site coverage", "Status", "Next note"], brief_covered_rows)}
+    </section>
+
+    <section class="section">
+      <h2>Thin / strengthen before submission</h2>
+      {table(["Project Brief area", "Why it is thin", "Status", "Suggested action"], brief_thin_rows)}
+    </section>
+
+    <section class="section">
+      <h2>Missing or not really broken out yet</h2>
+      {table(["Project Brief area", "Gap", "Status", "Suggested action"], brief_missing_rows)}
+    </section>
+
+    <section class="section band">
+      <h2>Codes governing work register</h2>
+      <p>This register is pulled from the Project Brief's codes section. It is a tracking aid only. VFG and the relevant specialists need to confirm which standards apply, who owns them, and whether they already have paid standards access.</p>
+      {table(["Code / standard / source", "Tender relevance", "Where it appears", "Current status"], code_rows)}
+    </section>
+
+    <section class="section band tint">
+      <h2>Practical next step</h2>
+      <p>If the team proceeds after the site inspection, the next useful build is a private or internal Project Brief clause checklist. That should map each obligation to owner, evidence, due date, public/private status and whether it belongs in the tender response, the construction methodology, a management plan or a post-award delivery register.</p>
+    </section>
+    """
+    write("pages/project-brief-coverage.html", layout("pages/project-brief-coverage.html", "Project Brief coverage", "A practical audit of what the site already covers, where it is thin, and what the Project Brief still needs VFG or specialist owners to confirm.", brief_coverage))
+
     compliance_rows = [
         ["Mandatory site inspection", "Addendum 1 / ITT", "Attendance confirmation", "Joint", badge("To confirm"), "Confirm who attends and how attendance is recorded."],
         ["Signed addendum", "Addendum 1", "Signed addendum returned", "Tender lead", badge("To confirm"), "Must be returned with tender documents."],
@@ -1962,6 +2162,7 @@ def write_pages() -> None:
     <section class="section band">
       <h2>Matrix status</h2>
       <p>This is a starting matrix, not a final compliance statement. Owners and status labels should be confirmed before any tender response is lodged.</p>
+      <p><a class="button-link secondary" href="project-brief-coverage.html">Open Project Brief coverage audit</a></p>
     </section>
     <section class="section">
       {table(["Tender requirement", "Source document / section", "Returnable or deliverable", "Owner", "Status", "Notes"], compliance_rows)}
