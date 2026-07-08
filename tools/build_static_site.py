@@ -1488,6 +1488,10 @@ def write_pages() -> None:
         ["Skateboarder-owned practical design sensibility", "Rideability, terrain diversity and feature selection.", "Examples of bowls, street elements and progression layouts."],
       ])}
     </section>
+    <section class="section band tint">
+      <h2>Public project examples to request evidence for</h2>
+      <p>VFG's public projects page includes examples such as Black Head NSW 2025, Newcastle Beach NSW current, Boorowa 2021, Barham 2019, Finley 2019, Howlong 2018 and Murwillumbah 2016. Treat these as source leads only. The tender response should use VFG-approved project descriptions, scopes, referees and permissions.</p>
+    </section>
     """
     write("pages/vfg-capability-map.html", layout("pages/vfg-capability-map.html", "VFG capability map", "A source-aware way to connect VFG's public capability signals to the tender response, pending VFG confirmation.", vfg))
 
