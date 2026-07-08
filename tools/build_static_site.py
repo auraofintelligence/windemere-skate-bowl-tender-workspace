@@ -13,6 +13,7 @@ NAV = [
     ("index.html", "Dashboard"),
     ("pages/tender-overview.html", "Tender overview"),
     ("pages/site-visit.html", "Site visit"),
+    ("pages/site-photos.html", "Site photos"),
     ("pages/partnership.html", "Partnership"),
     ("pages/vfg-capability-map.html", "VFG capability"),
     ("pages/strange-but-true-role.html", "Luke role"),
@@ -31,11 +32,90 @@ NAV = [
     ("pages/submission-roadmap.html", "Roadmap"),
 ]
 
+site_photos = [
+    {
+        "src": f"../assets/img/site-photos/windemere-site-{i:02d}.jpg",
+        "homeSrc": f"assets/img/site-photos/windemere-site-{i:02d}.jpg",
+        "caption": f"Appendix D site photo plate {i:02d}",
+        "source": "Appendix D - Site Photos - 02 June 2026",
+        "alt": f"Actual tender site photo from Appendix D, plate {i:02d}.",
+    }
+    for i in range(1, 16)
+]
+
+vfg_images = [
+    {
+        "src": "../assets/img/vfg/vfg-home-facility.jpg",
+        "homeSrc": "assets/img/vfg/vfg-home-facility.jpg",
+        "caption": "VFG public website image - action sport facility context",
+        "source": "VFG public website home page",
+        "sourceUrl": "https://www.skateparkconstruction.com.au/userfiles/image/home-img.jpg",
+        "alt": "VFG public website image showing an action sport facility context.",
+    },
+    {
+        "src": "../assets/img/vfg/vfg-black-head-01.jpg",
+        "homeSrc": "assets/img/vfg/vfg-black-head-01.jpg",
+        "caption": "Black Head NSW 2025 - construction image from VFG public projects page",
+        "source": "VFG public projects page",
+        "sourceUrl": "https://www.skateparkconstruction.com.au/userfiles/image/black-head-skatepark-01.jpg",
+        "alt": "Black Head NSW 2025 construction image from VFG public projects page.",
+    },
+    {
+        "src": "../assets/img/vfg/vfg-black-head-02.jpg",
+        "homeSrc": "assets/img/vfg/vfg-black-head-02.jpg",
+        "caption": "Black Head NSW 2025 - construction image from VFG public projects page",
+        "source": "VFG public projects page",
+        "sourceUrl": "https://www.skateparkconstruction.com.au/userfiles/image/black-head-skatepark-02.jpg",
+        "alt": "Black Head NSW 2025 construction image from VFG public projects page.",
+    },
+    {
+        "src": "../assets/img/vfg/vfg-boorowa-2021.jpg",
+        "homeSrc": "assets/img/vfg/vfg-boorowa-2021.jpg",
+        "caption": "Boorowa 2021 - construction image from VFG public projects page",
+        "source": "VFG public projects page",
+        "sourceUrl": "https://www.skateparkconstruction.com.au/userfiles/image/Resized_20211207_125335%202.jpeg",
+        "alt": "Boorowa 2021 construction image from VFG public projects page.",
+    },
+    {
+        "src": "../assets/img/vfg/vfg-barham-2019.jpg",
+        "homeSrc": "assets/img/vfg/vfg-barham-2019.jpg",
+        "caption": "Barham 2019 - consultation, conceptualisation, design and construction example",
+        "source": "VFG public projects page",
+        "sourceUrl": "https://www.skateparkconstruction.com.au/userfiles/image/Barham.jpg",
+        "alt": "Barham 2019 project image from VFG public projects page.",
+    },
+    {
+        "src": "../assets/img/vfg/vfg-finley-2019.jpg",
+        "homeSrc": "assets/img/vfg/vfg-finley-2019.jpg",
+        "caption": "Finley 2019 - consultation, conceptualisation, design and construction example",
+        "source": "VFG public projects page",
+        "sourceUrl": "https://www.skateparkconstruction.com.au/userfiles/image/Finley.jpg",
+        "alt": "Finley 2019 project image from VFG public projects page.",
+    },
+    {
+        "src": "../assets/img/vfg/vfg-howlong-2018.jpg",
+        "homeSrc": "assets/img/vfg/vfg-howlong-2018.jpg",
+        "caption": "Howlong 2018 - construction example",
+        "source": "VFG public projects page",
+        "sourceUrl": "https://www.skateparkconstruction.com.au/userfiles/image/Howlong.jpg",
+        "alt": "Howlong 2018 project image from VFG public projects page.",
+    },
+    {
+        "src": "../assets/img/vfg/vfg-murwillumbah-2016.jpg",
+        "homeSrc": "assets/img/vfg/vfg-murwillumbah-2016.jpg",
+        "caption": "Murwillumbah 2016 - construction example",
+        "source": "VFG public projects page",
+        "sourceUrl": "https://www.skateparkconstruction.com.au/userfiles/image/Murwilumbah.jpg",
+        "alt": "Murwillumbah 2016 project image from VFG public projects page.",
+    },
+]
+
 
 def write(path: str, content: str) -> None:
     target = ROOT / path
     target.parent.mkdir(parents=True, exist_ok=True)
-    target.write_text(content.strip() + "\n", encoding="utf-8")
+    cleaned = "\n".join(line.rstrip() for line in content.strip().splitlines())
+    target.write_text(cleaned + "\n", encoding="utf-8")
 
 
 def esc(value: object) -> str:
@@ -177,6 +257,30 @@ def table(headers: list[str], rows: list[list[str]], classes: str = "") -> str:
     """
 
 
+def photo_grid(items: list[dict[str, str]], *, home: bool = False, limit: int | None = None) -> str:
+    selected = items[:limit] if limit else items
+    cards = []
+    for item in selected:
+        src = item["homeSrc"] if home else item["src"]
+        source = item.get("source", "")
+        source_url = item.get("sourceUrl")
+        source_html = (
+            f"<a href=\"{esc(source_url)}\" rel=\"noopener\">{esc(source)}</a>"
+            if source_url
+            else esc(source)
+        )
+        cards.append(f"""
+          <figure class="photo-card">
+            <img src="{esc(src)}" alt="{esc(item['alt'])}" loading="lazy">
+            <figcaption>
+              <strong>{esc(item['caption'])}</strong>
+              <span>{source_html}</span>
+            </figcaption>
+          </figure>
+        """)
+    return f"<div class=\"photo-grid\">{''.join(cards)}</div>"
+
+
 questions = [
     {"id": "Q01", "question": "What are VFG's practical ideas for the bowl repairs?", "category": "Bowl repair", "raisedBy": "Luke", "owner": "VFG", "due": "Site visit", "status": "To confirm", "notes": "", "impact": "Shapes repair method and Returnable I."},
     {"id": "Q02", "question": "Which defects are safety-critical vs desirable improvements?", "category": "Safety", "raisedBy": "Luke", "owner": "VFG / Specialist", "due": "Site visit", "status": "To confirm", "notes": "", "impact": "Separates mandatory repair scope from enhancement ideas."},
@@ -225,7 +329,7 @@ docs = [
     {"file": "Appendix_A-PDG-20842_CIP_Skate_Bowl-Windemere_Road_Park__Alexandra_Hills-Ow (1).pdf", "purpose": "Owner's consent / property-related appendix.", "notes": "Supports site authority context.", "usedFor": "Document register and planning context.", "caution": "Do not publish full property documentation."},
     {"file": "Appendix_B-2023_Redland_City_Council_Wayfinding_Signage_Manual_Core_Standar (2).pdf", "purpose": "Wayfinding signage core standards.", "notes": "Any signage concept should be RCC-style compliant, accessible, visible and non-hazardous.", "usedFor": "Concept design and signage notes.", "caution": "Do not reproduce manual content heavily."},
     {"file": "Appendix_C-RCC_Skatepark_Audit_Jan_2026.pdf", "purpose": "Skatepark audit for Windemere Road Park.", "notes": "Condition rating 3 - Fair. Priority actions include cracks/wide joints over 5 mm, height irregularities over 3 mm and coping repairs.", "usedFor": "Repair priorities, site visit questions, concept options.", "caution": "Do not convert audit notes into final design recommendations without VFG/specialist review."},
-    {"file": "Appendix_D-Site_Photos-02_June_2026.pdf", "purpose": "June 2026 site photo pack.", "notes": "Photos show water/pooling, debris, graffiti, cracking and existing shelter/fencing context.", "usedFor": "Drainage questions and site observations.", "caution": "Do not publish raw photos unless approved."},
+    {"file": "Appendix_D-Site_Photos-02_June_2026.pdf", "purpose": "June 2026 site photo pack.", "notes": "Photos show water/pooling, debris, graffiti, cracking and existing shelter/fencing context.", "usedFor": "Drainage questions, site observations and public visual context.", "caution": "Source PDF stays local; extracted web images are included in this repo by project direction."},
     {"file": "Appendix_E-FBD-106_A_Fencing_Welded_Mesh_Fencing_&_Control_Fence.pdf", "purpose": "Welded mesh fencing / control fence detail.", "notes": "Use standard detail as source where fencing is relevant.", "usedFor": "Fencing and ancillary works planning.", "caution": "Concept only until confirmed against standards and site."},
     {"file": "PDG-20842-1_AS4300-1995_General_Conditions.pdf", "purpose": "General contract conditions.", "notes": "Important for risk review and formal tender/legal review.", "usedFor": "Risk and assumptions.", "caution": "Not legal advice. Do not publish full contract conditions."},
 ]
@@ -517,6 +621,58 @@ a:focus {
   color: #d9e7e7;
   padding: 0.65rem 0.8rem;
   font-size: 0.82rem;
+}
+
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.photo-card {
+  margin: 0;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.photo-card img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  background: var(--concrete-2);
+}
+
+.photo-card figcaption {
+  padding: 0.75rem;
+  font-size: 0.86rem;
+  color: var(--muted);
+}
+
+.photo-card figcaption strong,
+.photo-card figcaption span {
+  display: block;
+}
+
+.photo-card figcaption strong {
+  color: var(--navy);
+  margin-bottom: 0.22rem;
+}
+
+.image-rail {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.image-rail img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
 }
 
 .quick-status {
@@ -825,6 +981,11 @@ tbody tr:hover {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .photo-grid,
+  .image-rail {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .board {
     grid-template-columns: repeat(2, minmax(220px, 1fr));
   }
@@ -846,7 +1007,9 @@ tbody tr:hover {
   }
 
   .grid,
-  .board {
+  .board,
+  .photo-grid,
+  .image-rail {
     grid-template-columns: 1fr;
   }
 
@@ -1100,6 +1263,8 @@ def write_data() -> None:
     write("data/tasks.json", json.dumps(tasks, indent=2))
     write("data/docs.json", json.dumps(docs, indent=2))
     write("data/returnables.json", json.dumps(returnables, indent=2))
+    write("data/site-photos.json", json.dumps(site_photos, indent=2))
+    write("data/vfg-images.json", json.dumps(vfg_images, indent=2))
 
 
 def write_meta_files() -> None:
@@ -1335,8 +1500,8 @@ def write_pages() -> None:
         </div>
       </div>
       <figure class="hero-image">
-        <img src="assets/img/windemere-workspace-hero.png" alt="Illustrative concrete skate bowl concept image, not a site photo.">
-        <figcaption>Illustrative workspace image only. Not a site photo, not a design recommendation, not for construction.</figcaption>
+        <img src="assets/img/site-photos/windemere-site-01.jpg" alt="Actual Appendix D site photo showing water pooling near the skate bowl.">
+        <figcaption>Actual Appendix D site photo, 02 June 2026. The visible pooling is a key site-visit verification issue.</figcaption>
       </figure>
     </section>
 
@@ -1345,6 +1510,7 @@ def write_pages() -> None:
       <div class="grid">
         {card("Tender snapshot", "PDG-20842-1 asks for design-and-construct refurbishment of the Windemere Road Park skate bowl, including repair, new elements, ancillary works, certification and management plans.", "Tender fact", "pages/tender-overview.html")}
         {card("Site visit next step", "Working assumption: mandatory site inspection at 10:00 am Wednesday 15 July 2026. RSVP by 2:00 pm Tuesday 14 July 2026.", "To confirm", "pages/site-visit.html")}
+        {card("Actual site photos", "Appendix D photos are now included as web images so drainage, cracking, debris, shelter and fencing context can be reviewed directly.", "Source imagery", "pages/site-photos.html")}
         {card("Partnership status", "Luke, Paolo and Kieran are testing fit. The workspace should help the team proceed, pause or no-bid respectfully.", "Exploratory", "pages/partnership.html")}
         {card("Decision gate", "Proceed only if VFG can lead the technical/design/build response and the specialist pathway is credible.", "Decision point", "pages/decision-gate.html")}
         {card("VFG capability fit", "Public VFG material maps well to consulting, design, construction, maintenance, repairs and skatepark-specific delivery evidence.", "Needs VFG review", "pages/vfg-capability-map.html")}
@@ -1357,7 +1523,7 @@ def write_pages() -> None:
 
     <section class="section band tint">
       <h2>Keep this clean</h2>
-      <p>The public version is an organising layer, not the tender submission. Raw source documents, prices, signatures, private contact details and filled returnables stay out of GitHub Pages unless the whole team has agreed otherwise.</p>
+      <p>The public version is an organising layer, not the tender submission. Actual site and VFG public images are now included for context, while raw source PDFs, prices, signatures, private contact details and filled returnables stay out of GitHub Pages unless the team agrees otherwise.</p>
     </section>
     """
     write("index.html", layout("index.html", "Exploratory tender dashboard", "A practical workspace for understanding the Redland skate bowl tender, testing the partnership fit, and keeping the response pathway honest.", homepage, body_class="home"))
@@ -1390,6 +1556,18 @@ def write_pages() -> None:
         <h3>What the photos suggest</h3>
         <p>The June 2026 site photos show standing water or pooling, debris, graffiti, cracking and the surrounding shelter and fencing context. Drainage should be treated as a verification issue because the audit says no water was seen pooling at the time of inspection.</p>
       </article>
+    </section>
+
+    <section class="section band">
+      <h2>Actual site-photo evidence</h2>
+      <p>The images below are extracted from Appendix D and resized for the web. They should guide site-visit questions about drainage, cracking, debris, shelter, fencing and surrounding park context.</p>
+      <div class="image-rail">
+        <img src="../assets/img/site-photos/windemere-site-01.jpg" alt="Actual Appendix D photo showing water pooling near the skate bowl.">
+        <img src="../assets/img/site-photos/windemere-site-09.jpg" alt="Actual Appendix D close photo showing debris and surface marks.">
+        <img src="../assets/img/site-photos/windemere-site-13.jpg" alt="Actual Appendix D close photo showing cracking in concrete.">
+        <img src="../assets/img/site-photos/windemere-site-07.jpg" alt="Actual Appendix D photo showing shelter and seating context.">
+      </div>
+      <p><a class="button-link" href="site-photos.html">Open the full site photo gallery</a></p>
     </section>
 
     <section class="section band">
@@ -1444,6 +1622,32 @@ def write_pages() -> None:
     """
     write("pages/site-visit.html", layout("pages/site-visit.html", "Site visit agenda", "A printable agenda and question set for the mandatory site inspection and the first real partnership conversation.", site_visit))
 
+    site_photos_page = f"""
+    <section class="section band">
+      <h2>Appendix D extracted images</h2>
+      <p>These are the actual site-photo images extracted from Appendix D - Site Photos - 02 June 2026 and resized for GitHub Pages. They are included as working visual context for the site visit, concept discussion and tender questions.</p>
+      <p>The source PDF is still not published here. This page gives the team the practical visual evidence without asking everyone to dig through the PDF pack.</p>
+      <div class="label-strip">{badge("Actual tender-pack imagery", "gum")}{badge("Working evidence", "dark")}{badge("Not design recommendation", "warning")}</div>
+    </section>
+
+    <section class="section">
+      <h2>Full photo set</h2>
+      {photo_grid(site_photos)}
+    </section>
+
+    <section class="section band tint">
+      <h2>What to check on site</h2>
+      {list_items([
+        "Whether the visible water pooling is drainage design, maintenance, recent rain, low spots or a mix.",
+        "Which surface cracks and joints match the Appendix C priority repair thresholds.",
+        "Whether debris and organic build-up are isolated maintenance issues or signal ongoing water/shelter/vegetation interactions.",
+        "How the shelter, fencing, seating and surrounding trees affect access, staging, safety and user experience.",
+        "Which conditions need survey, levels, service locating, structural review or RPEQ input before drawings get serious.",
+      ])}
+    </section>
+    """
+    write("pages/site-photos.html", layout("pages/site-photos.html", "Actual site photos", "The Appendix D site photos brought into the workspace as real visual evidence, not just text summary.", site_photos_page))
+
     partnership = f"""
     <section class="section band">
       <h2>Working frame</h2>
@@ -1491,6 +1695,11 @@ def write_pages() -> None:
     <section class="section band tint">
       <h2>Public project examples to request evidence for</h2>
       <p>VFG's public projects page includes examples such as Black Head NSW 2025, Newcastle Beach NSW current, Boorowa 2021, Barham 2019, Finley 2019, Howlong 2018 and Murwillumbah 2016. Treat these as source leads only. The tender response should use VFG-approved project descriptions, scopes, referees and permissions.</p>
+    </section>
+    <section class="section">
+      <h2>VFG public imagery</h2>
+      <p>These images are taken from VFG's public website and project pages so the capability discussion can use real VFG visual context. They should be replaced, approved or refined by VFG before any final tender material is prepared.</p>
+      {photo_grid(vfg_images)}
     </section>
     """
     write("pages/vfg-capability-map.html", layout("pages/vfg-capability-map.html", "VFG capability map", "A source-aware way to connect VFG's public capability signals to the tender response, pending VFG confirmation.", vfg))

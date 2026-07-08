@@ -1,0 +1,66 @@
+[
+  {
+    "src": "../assets/img/vfg/vfg-home-facility.jpg",
+    "homeSrc": "assets/img/vfg/vfg-home-facility.jpg",
+    "caption": "VFG public website image - action sport facility context",
+    "source": "VFG public website home page",
+    "sourceUrl": "https://www.skateparkconstruction.com.au/userfiles/image/home-img.jpg",
+    "alt": "VFG public website image showing an action sport facility context."
+  },
+  {
+    "src": "../assets/img/vfg/vfg-black-head-01.jpg",
+    "homeSrc": "assets/img/vfg/vfg-black-head-01.jpg",
+    "caption": "Black Head NSW 2025 - construction image from VFG public projects page",
+    "source": "VFG public projects page",
+    "sourceUrl": "https://www.skateparkconstruction.com.au/userfiles/image/black-head-skatepark-01.jpg",
+    "alt": "Black Head NSW 2025 construction image from VFG public projects page."
+  },
+  {
+    "src": "../assets/img/vfg/vfg-black-head-02.jpg",
+    "homeSrc": "assets/img/vfg/vfg-black-head-02.jpg",
+    "caption": "Black Head NSW 2025 - construction image from VFG public projects page",
+    "source": "VFG public projects page",
+    "sourceUrl": "https://www.skateparkconstruction.com.au/userfiles/image/black-head-skatepark-02.jpg",
+    "alt": "Black Head NSW 2025 construction image from VFG public projects page."
+  },
+  {
+    "src": "../assets/img/vfg/vfg-boorowa-2021.jpg",
+    "homeSrc": "assets/img/vfg/vfg-boorowa-2021.jpg",
+    "caption": "Boorowa 2021 - construction image from VFG public projects page",
+    "source": "VFG public projects page",
+    "sourceUrl": "https://www.skateparkconstruction.com.au/userfiles/image/Resized_20211207_125335%202.jpeg",
+    "alt": "Boorowa 2021 construction image from VFG public projects page."
+  },
+  {
+    "src": "../assets/img/vfg/vfg-barham-2019.jpg",
+    "homeSrc": "assets/img/vfg/vfg-barham-2019.jpg",
+    "caption": "Barham 2019 - consultation, conceptualisation, design and construction example",
+    "source": "VFG public projects page",
+    "sourceUrl": "https://www.skateparkconstruction.com.au/userfiles/image/Barham.jpg",
+    "alt": "Barham 2019 project image from VFG public projects page."
+  },
+  {
+    "src": "../assets/img/vfg/vfg-finley-2019.jpg",
+    "homeSrc": "assets/img/vfg/vfg-finley-2019.jpg",
+    "caption": "Finley 2019 - consultation, conceptualisation, design and construction example",
+    "source": "VFG public projects page",
+    "sourceUrl": "https://www.skateparkconstruction.com.au/userfiles/image/Finley.jpg",
+    "alt": "Finley 2019 project image from VFG public projects page."
+  },
+  {
+    "src": "../assets/img/vfg/vfg-howlong-2018.jpg",
+    "homeSrc": "assets/img/vfg/vfg-howlong-2018.jpg",
+    "caption": "Howlong 2018 - construction example",
+    "source": "VFG public projects page",
+    "sourceUrl": "https://www.skateparkconstruction.com.au/userfiles/image/Howlong.jpg",
+    "alt": "Howlong 2018 project image from VFG public projects page."
+  },
+  {
+    "src": "../assets/img/vfg/vfg-murwillumbah-2016.jpg",
+    "homeSrc": "assets/img/vfg/vfg-murwillumbah-2016.jpg",
+    "caption": "Murwillumbah 2016 - construction example",
+    "source": "VFG public projects page",
+    "sourceUrl": "https://www.skateparkconstruction.com.au/userfiles/image/Murwilumbah.jpg",
+    "alt": "Murwillumbah 2016 project image from VFG public projects page."
+  }
+]

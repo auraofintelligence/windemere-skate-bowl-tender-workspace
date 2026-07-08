@@ -42,6 +42,23 @@ http://localhost:8000/
 
 The site is plain HTML, CSS and JavaScript. There is no frontend build step.
 
+## Real image workflow
+
+The site uses extracted Appendix D site photos and public VFG website images.
+
+To regenerate those image assets, install the image/PDF helpers if needed:
+
+```powershell
+python -m pip install pymupdf pillow
+```
+
+Then run:
+
+```powershell
+python tools\extract_real_images.py --appendix-d "C:\path\to\Appendix_D-Site_Photos-02_June_2026.pdf"
+python tools\build_static_site.py
+```
+
 ## GitHub Pages
 
 The site is designed to publish from the repository root on the `main` branch.
