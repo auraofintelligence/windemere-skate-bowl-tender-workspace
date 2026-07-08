@@ -3,11 +3,14 @@ from __future__ import annotations
 import html
 import json
 from pathlib import Path
+from urllib.parse import quote
 
 
 ROOT = Path(__file__).resolve().parents[1]
 SITE_TITLE = "Strange But True x VFG exploratory workspace"
 TENDER_TITLE = "PDG-20842-1 Skate Bowl Refurbishment"
+SITE_URL = "https://auraofintelligence.github.io/windemere-skate-bowl-tender-workspace/"
+DOCUMENT_ZIP = "PDG-20842-1_Windemere_tender_documents.zip"
 
 NAV = [
     ("index.html", "Dashboard"),
@@ -30,6 +33,7 @@ NAV = [
     ("pages/back-and-forth-log.html", "Back-and-forth"),
     ("pages/local-benefit.html", "Local benefit"),
     ("pages/submission-roadmap.html", "Roadmap"),
+    ("pages/site-map.html", "Site map"),
 ]
 
 site_photos = [
@@ -122,6 +126,10 @@ def esc(value: object) -> str:
     return html.escape(str(value), quote=True)
 
 
+def url_parts(path: str) -> str:
+    return "/".join(quote(part) for part in path.split("/"))
+
+
 def base_for(path: str) -> str:
     return "../" if path.startswith("pages/") else ""
 
@@ -197,7 +205,7 @@ def layout(path: str, title: str, intro: str, body: str, *, body_class: str = ""
   </header>
 
   <aside class="caution-banner" role="note">
-    <strong>Public/private caution:</strong> This workspace summarises source documents for discussion. Do not publish raw tender documents, prices, signatures, private contacts, or final tender material without team approval.
+    <strong>Public/private caution:</strong> Source tender documents are downloadable here for easy review. Keep filled returnables, prices, signatures, private contacts and final tender material out of the public site unless the team explicitly agrees.
   </aside>
 
   <main id="main" class="page-shell">
@@ -301,7 +309,7 @@ questions = [
 ]
 
 tasks = [
-    {"id": "T01", "title": "Confirm repo privacy and publication boundary", "status": "To confirm", "owner": "Luke", "due": "Now", "notes": "Public Pages is allowed, but raw tender files and private details stay out."},
+    {"id": "T01", "title": "Confirm repo publication boundary", "status": "Ready", "owner": "Luke", "due": "Now", "notes": "Source tender files are public here by project direction; filled forms, prices and private details stay out."},
     {"id": "T02", "title": "Confirm VFG contact details to display or keep private", "status": "To confirm", "owner": "VFG / Luke", "due": "Before public sharing", "notes": "Prefer website links, not personal contact details."},
     {"id": "T03", "title": "Confirm mandatory site inspection attendance", "status": "To confirm", "owner": "VFG / Luke", "due": "RSVP by 2:00 pm Tuesday 14 July 2026", "notes": "Addendum 1 updated the site inspection details."},
     {"id": "T04", "title": "Confirm addendum signed and returnable", "status": "To confirm", "owner": "Tender lead", "due": "Tender submission", "notes": "Signed Addendum 1 must come back with tender documents."},
@@ -321,18 +329,22 @@ tasks = [
 ]
 
 docs = [
-    {"file": "(Addendum)_PDG-20842-1_Addendum_1.pdf", "purpose": "Updates tender timing and site inspection details.", "notes": "Closing moved to 2:00 pm 6 August 2026. Mandatory site inspection moved to 10:00 am Wednesday 15 July 2026. RSVP by 2:00 pm Tuesday 14 July 2026.", "usedFor": "Dates, attendance, signed addendum task.", "caution": "Do not republish raw PDF or signature page."},
-    {"file": "PDG-20842-1_ITT_Invitation_To_Tender.pdf", "purpose": "Invitation, tender rules, evaluation criteria and lodgement structure.", "notes": "Section A retained by tenderers. Section B deliverables become the tender offer.", "usedFor": "Tender overview, compliance matrix, returnables.", "caution": "Summarise only. Do not publish full tender conditions."},
-    {"file": "PDG-20842-1_Project_Brief.pdf", "purpose": "Technical project brief and design-and-construct scope.", "notes": "Includes staged design, RPEQ for-construction drawings, as-constructed and Form 16 pathway.", "usedFor": "Scope, CAD workflow, specialist boundaries.", "caution": "Do not treat summaries as engineering advice."},
-    {"file": "PDG-20842-1_Section_B_Returnable_Schedule_Attachments.docx", "purpose": "Returnable schedules A-L to complete and lodge.", "notes": "Failure to provide required schedules may make a tender non-conforming.", "usedFor": "Returnables page and compliance matrix.", "caution": "Do not publish filled forms, signatures, prices or private evidence."},
-    {"file": "PDG-20842-1_Bill_of_Quantities.xlsm", "purpose": "BOQ workbook for tendered sum structure.", "notes": "Use for structure only in this workspace. Pricing belongs outside the public site.", "usedFor": "Returnable H planning.", "caution": "Never publish rates, totals or commercial assumptions."},
-    {"file": "Appendix_A-PDG-20842_CIP_Skate_Bowl-Windemere_Road_Park__Alexandra_Hills-Ow (1).pdf", "purpose": "Owner's consent / property-related appendix.", "notes": "Supports site authority context.", "usedFor": "Document register and planning context.", "caution": "Do not publish full property documentation."},
-    {"file": "Appendix_B-2023_Redland_City_Council_Wayfinding_Signage_Manual_Core_Standar (2).pdf", "purpose": "Wayfinding signage core standards.", "notes": "Any signage concept should be RCC-style compliant, accessible, visible and non-hazardous.", "usedFor": "Concept design and signage notes.", "caution": "Do not reproduce manual content heavily."},
-    {"file": "Appendix_C-RCC_Skatepark_Audit_Jan_2026.pdf", "purpose": "Skatepark audit for Windemere Road Park.", "notes": "Condition rating 3 - Fair. Priority actions include cracks/wide joints over 5 mm, height irregularities over 3 mm and coping repairs.", "usedFor": "Repair priorities, site visit questions, concept options.", "caution": "Do not convert audit notes into final design recommendations without VFG/specialist review."},
-    {"file": "Appendix_D-Site_Photos-02_June_2026.pdf", "purpose": "June 2026 site photo pack.", "notes": "Photos show water/pooling, debris, graffiti, cracking and existing shelter/fencing context.", "usedFor": "Drainage questions, site observations and public visual context.", "caution": "Source PDF stays local; extracted web images are included in this repo by project direction."},
-    {"file": "Appendix_E-FBD-106_A_Fencing_Welded_Mesh_Fencing_&_Control_Fence.pdf", "purpose": "Welded mesh fencing / control fence detail.", "notes": "Use standard detail as source where fencing is relevant.", "usedFor": "Fencing and ancillary works planning.", "caution": "Concept only until confirmed against standards and site."},
-    {"file": "PDG-20842-1_AS4300-1995_General_Conditions.pdf", "purpose": "General contract conditions.", "notes": "Important for risk review and formal tender/legal review.", "usedFor": "Risk and assumptions.", "caution": "Not legal advice. Do not publish full contract conditions."},
+    {"file": "(Addendum)_PDG-20842-1_Addendum_1.pdf", "purpose": "Updates tender timing and site inspection details.", "notes": "Closing moved to 2:00 pm 6 August 2026. Mandatory site inspection moved to 10:00 am Wednesday 15 July 2026. RSVP by 2:00 pm Tuesday 14 July 2026.", "usedFor": "Dates, attendance, signed addendum task.", "caution": "Downloadable source document. Upload only blank/source copy, not a signed return copy."},
+    {"file": "PDG-20842-1_ITT_Invitation_To_Tender.pdf", "purpose": "Invitation, tender rules, evaluation criteria and lodgement structure.", "notes": "Section A retained by tenderers. Section B deliverables become the tender offer.", "usedFor": "Tender overview, compliance matrix, returnables.", "caution": "Downloadable source document. Site pages still use summary language for readability."},
+    {"file": "PDG-20842-1_Project_Brief.pdf", "purpose": "Technical project brief and design-and-construct scope.", "notes": "Includes staged design, RPEQ for-construction drawings, as-constructed and Form 16 pathway.", "usedFor": "Scope, CAD workflow, specialist boundaries.", "caution": "Downloadable source document. Summaries are not engineering advice."},
+    {"file": "PDG-20842-1_Section_B_Returnable_Schedule_Attachments.docx", "purpose": "Returnable schedules A-L to complete and lodge.", "notes": "Failure to provide required schedules may make a tender non-conforming.", "usedFor": "Returnables page and compliance matrix.", "caution": "Blank/source schedule is downloadable. Filled forms, signatures and private evidence stay out."},
+    {"file": "PDG-20842-1_Bill_of_Quantities.xlsm", "purpose": "BOQ workbook for tendered sum structure.", "notes": "Use for structure only in this workspace. Pricing belongs outside the public site.", "usedFor": "Returnable H planning.", "caution": "Blank/source workbook is downloadable. Completed prices, rates and totals stay out."},
+    {"file": "Appendix_A-PDG-20842_CIP_Skate_Bowl-Windemere_Road_Park__Alexandra_Hills-Ow (1).pdf", "purpose": "Owner's consent / property-related appendix.", "notes": "Supports site authority context.", "usedFor": "Document register and planning context.", "caution": "Downloadable source document for tender context."},
+    {"file": "Appendix_B-2023_Redland_City_Council_Wayfinding_Signage_Manual_Core_Standar (2).pdf", "purpose": "Wayfinding signage core standards.", "notes": "Any signage concept should be RCC-style compliant, accessible, visible and non-hazardous.", "usedFor": "Concept design and signage notes.", "caution": "Downloadable source document. Reuse in final tender material should stay source-faithful."},
+    {"file": "Appendix_C-RCC_Skatepark_Audit_Jan_2026.pdf", "purpose": "Skatepark audit for Windemere Road Park.", "notes": "Condition rating 3 - Fair. Priority actions include cracks/wide joints over 5 mm, height irregularities over 3 mm and coping repairs.", "usedFor": "Repair priorities, site visit questions, concept options.", "caution": "Downloadable source document. Do not turn audit notes into final design recommendations without VFG/specialist review."},
+    {"file": "Appendix_D-Site_Photos-02_June_2026.pdf", "purpose": "June 2026 site photo pack.", "notes": "Photos show water/pooling, debris, graffiti, cracking and existing shelter/fencing context.", "usedFor": "Drainage questions, site observations and public visual context.", "caution": "Downloadable source document. Extracted web images are also shown on the site photos page."},
+    {"file": "Appendix_E-FBD-106_A_Fencing_Welded_Mesh_Fencing_&_Control_Fence.pdf", "purpose": "Welded mesh fencing / control fence detail.", "notes": "Use standard detail as source where fencing is relevant.", "usedFor": "Fencing and ancillary works planning.", "caution": "Downloadable source document. Concept only until confirmed against standards and site."},
+    {"file": "PDG-20842-1_AS4300-1995_General_Conditions.pdf", "purpose": "General contract conditions.", "notes": "Important for risk review and formal tender/legal review.", "usedFor": "Risk and assumptions.", "caution": "Downloadable source document. Not legal advice."},
+    {"file": "READ ME - TRUNCATED FILE NAMES.txt", "purpose": "VendorPanel package note.", "notes": "Explains that some downloaded filenames may be truncated.", "usedFor": "Download-pack housekeeping.", "caution": "Downloadable package note."},
 ]
+
+for doc in docs:
+    doc["downloadPath"] = f"../tender-documents/{url_parts(doc['file'])}"
 
 returnables = [
     {"id": "A", "name": "Form of Tender", "asks": "Formal tender offer details and signing.", "lead": "VFG / tender lead", "luke": "Can help organise wording and check completeness.", "evidence": "Authorised signer, legal entity details, final offer package.", "nonConforming": "Unsigned, incomplete or inconsistent offer details."},
@@ -675,6 +687,96 @@ a:focus {
   border: 1px solid var(--border);
 }
 
+.sbt-intro {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(280px, 1.1fr);
+  gap: clamp(1rem, 3vw, 2rem);
+  align-items: stretch;
+  background: #121c27;
+  color: var(--white);
+  border-radius: var(--radius);
+  padding: clamp(1.1rem, 3vw, 2rem);
+  box-shadow: var(--shadow);
+}
+
+.sbt-logo-panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 21rem;
+}
+
+.sbt-logo-panel img {
+  width: min(14rem, 70vw);
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  box-shadow: 0 16px 38px rgba(0, 0, 0, 0.28);
+}
+
+.sbt-intro h2 {
+  color: var(--white);
+  font-size: clamp(2rem, 4vw, 4rem);
+  line-height: 1;
+  margin: 0 0 1rem;
+}
+
+.sbt-intro p,
+.sbt-intro li {
+  color: #dce8ea;
+}
+
+.sbt-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  margin-top: 1rem;
+}
+
+.project-link-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.9rem;
+}
+
+.project-link-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  min-height: 13rem;
+  padding: 1rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--white);
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.project-link-card span {
+  width: fit-content;
+  padding: 0.2rem 0.45rem;
+  border-radius: 4px;
+  background: var(--teal-soft);
+  color: #124948;
+  font-size: 0.74rem;
+  font-weight: 800;
+}
+
+.project-link-card strong {
+  color: var(--navy);
+  font-size: 1.03rem;
+}
+
+.project-link-card p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.project-link-card:hover,
+.project-link-card:focus {
+  border-color: var(--teal);
+  box-shadow: 0 10px 28px rgba(16, 36, 51, 0.12);
+}
+
 .quick-status {
   display: flex;
   flex-wrap: wrap;
@@ -743,6 +845,7 @@ a:focus {
 
 .card-link,
 .button-link,
+.download-link,
 .pager-link {
   display: inline-flex;
   align-items: center;
@@ -760,12 +863,28 @@ a:focus {
 
 .card-link:hover,
 .button-link:hover,
+.download-link:hover,
 .pager-link:hover,
 .card-link:focus,
 .button-link:focus,
+.download-link:focus,
 .pager-link:focus {
   background: var(--navy);
   color: var(--white);
+}
+
+.button-link.secondary {
+  background: var(--navy);
+}
+
+.button-link.secondary:hover,
+.button-link.secondary:focus {
+  background: var(--teal);
+}
+
+.download-link {
+  margin-top: 0;
+  white-space: nowrap;
 }
 
 .badge {
@@ -972,6 +1091,7 @@ tbody tr:hover {
 
 @media (max-width: 900px) {
   .hero-grid,
+  .sbt-intro,
   .split,
   .grid.two {
     grid-template-columns: 1fr;
@@ -981,6 +1101,7 @@ tbody tr:hover {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .project-link-grid,
   .photo-grid,
   .image-rail {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1008,6 +1129,7 @@ tbody tr:hover {
 
   .grid,
   .board,
+  .project-link-grid,
   .photo-grid,
   .image-rail {
     grid-template-columns: 1fr;
@@ -1208,6 +1330,7 @@ tbody tr:hover {
                 <th scope="col">Key notes</th>
                 <th scope="col">Used for</th>
                 <th scope="col">Public/private caution</th>
+                <th scope="col">Download</th>
               </tr>
             </thead>
             <tbody>
@@ -1218,6 +1341,7 @@ tbody tr:hover {
                   <td>${escapeHtml(row.notes)}</td>
                   <td>${escapeHtml(row.usedFor)}</td>
                   <td>${escapeHtml(row.caution)}</td>
+                  <td>${row.downloadPath ? `<a class="download-link" href="${escapeHtml(row.downloadPath)}" download>Download</a>` : ""}</td>
                 </tr>`).join("")}
             </tbody>
           </table>
@@ -1276,18 +1400,16 @@ def write_meta_files() -> None:
 </svg>
 """)
     write(".gitignore", r"""
-# Local tender/source documents stay out of the public repo.
+# Private/local working folders stay out of the public repo.
 RequestDocs/
 source-docs/
 source_docs/
 private/
 _private/
-*.pdf
-*.docx
-*.xlsm
-*.xlsx
-*.xls
-*.zip
+
+# The public source tender pack is intentionally tracked here.
+!tender-documents/
+!tender-documents/**
 
 # Local tooling clutter.
 .DS_Store
@@ -1298,6 +1420,16 @@ node_modules/
 tmp/
 """)
     write(".nojekyll", "")
+    sitemap_urls = "\n".join(
+        f"  <url><loc>{esc(SITE_URL + href)}</loc></url>"
+        for href, _label in NAV
+    )
+    write("sitemap.xml", f"""
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+{sitemap_urls}
+</urlset>
+""")
     write("LICENSE.md", """
 Copyright (c) 2026 Luke Nathan Hayes. All rights reserved.
 
@@ -1318,9 +1450,11 @@ The workspace helps organise tender facts, role boundaries, questions, tasks, dr
 
 ## Public/private caution
 
-The GitHub Pages site may be public, so keep the raw tender PDFs, Word files, spreadsheets, prices, signatures, private contact details, filled returnables and commercial-in-confidence material out of this repository.
+The blank/source tender pack is included in `tender-documents/` for easy public review by project direction.
 
-The `.gitignore` file blocks common tender document formats and private folders. Keep source documents locally outside the repo unless the team has agreed they can be published.
+Keep filled returnables, prices, signatures, private contact details, supplier quotes, private evidence and commercial-in-confidence material out of this repository.
+
+The `.gitignore` file blocks private working folders while allowing the published source tender pack.
 
 ## Licence
 
@@ -1328,13 +1462,12 @@ All rights reserved. See `LICENSE.md`.
 
 ## Suggested workflow
 
-1. Add uploaded tender docs locally outside this repo.
-2. Review the website pages before the site visit.
-3. Capture site notes and update `data/questions.json` and `data/tasks.json`.
-4. Confirm role split and role boundaries.
-5. Decide bid / no-bid.
-6. Draft returnables and concept CAD.
-7. VFG and relevant specialists review before anything goes to Council.
+1. Review the website pages and `tender-documents/` source pack before the site visit.
+2. Capture site notes and update `data/questions.json` and `data/tasks.json`.
+3. Confirm role split and role boundaries.
+4. Decide bid / no-bid.
+5. Draft returnables and concept CAD in a private working area.
+6. VFG and relevant specialists review before anything goes to Council.
 
 ## Local preview
 
@@ -1523,7 +1656,7 @@ def write_pages() -> None:
 
     <section class="section band tint">
       <h2>Keep this clean</h2>
-      <p>The public version is an organising layer, not the tender submission. Actual site and VFG public images are now included for context, while raw source PDFs, prices, signatures, private contact details and filled returnables stay out of GitHub Pages unless the team agrees otherwise.</p>
+      <p>The public version is an organising layer, not the tender submission. Blank/source tender documents, actual site photos and VFG public images are included for context. Prices, signatures, private contact details, filled returnables and final tender material stay out of GitHub Pages unless the team agrees otherwise.</p>
     </section>
     """
     write("index.html", layout("index.html", "Exploratory tender dashboard", "A practical workspace for understanding the Redland skate bowl tender, testing the partnership fit, and keeping the response pathway honest.", homepage, body_class="home"))
@@ -1626,7 +1759,7 @@ def write_pages() -> None:
     <section class="section band">
       <h2>Appendix D extracted images</h2>
       <p>These are the actual site-photo images extracted from Appendix D - Site Photos - 02 June 2026 and resized for GitHub Pages. They are included as working visual context for the site visit, concept discussion and tender questions.</p>
-      <p>The source PDF is still not published here. This page gives the team the practical visual evidence without asking everyone to dig through the PDF pack.</p>
+      <p>The source PDF is also downloadable from the document register. This page gives the team the practical visual evidence without asking everyone to dig through the PDF pack.</p>
       <div class="label-strip">{badge("Actual tender-pack imagery", "gum")}{badge("Working evidence", "dark")}{badge("Not design recommendation", "warning")}</div>
     </section>
 
@@ -1705,10 +1838,32 @@ def write_pages() -> None:
     write("pages/vfg-capability-map.html", layout("pages/vfg-capability-map.html", "VFG capability map", "A source-aware way to connect VFG's public capability signals to the tender response, pending VFG confirmation.", vfg))
 
     sbt = f"""
+    <section class="section sbt-intro">
+      <div class="sbt-logo-panel">
+        <img src="../assets/img/sbt/sbt-icon.webp" alt="Strange But True neon logo.">
+        <div class="sbt-actions">
+          <a class="button-link" href="https://auraofintelligence.github.io/strange-but-true/" rel="noopener">Open Strange But True</a>
+          <a class="button-link secondary" href="https://auraofintelligence.github.io/strange-but-true/community-ledger.html" rel="noopener">Open community ledger</a>
+        </div>
+      </div>
+      <div>
+        <h2>Public-safe civic planning support, not skatepark certification.</h2>
+        <p>Luke / Strange But True can help turn a messy tender pack into a clear working system: source summaries, task boards, question registers, public/private boundaries, local benefit framing and draft narrative that VFG can review.</p>
+        <p>The fit here is practical translation. VFG holds the skatepark expertise. Specialists hold engineering, certification and construction compliance. Strange But True can help the team keep evidence, story, roles and next actions readable.</p>
+      </div>
+    </section>
+
     <section class="section band">
-      <h2>Draft positioning supplied by Luke</h2>
-      <p>Strange but True provides holistic social and digital master planning for local communities. The focus is on systems that bring physical spaces to life, including practical community planning, local initiatives and cooperatives, plain-speaking digital and AI support, and public-area activation with accessible events and outdoor projection.</p>
-      <p>The aim is to design and support interconnected, resilient and joyful civic infrastructure for the Redlands and Minjerribah.</p>
+      <h2>Selective project-family references</h2>
+      <p>The Community Ledger has many public project cards. For this tender workspace, only the closest lanes are referenced: tender readiness, public-space activation, event planning, local capability and grant-to-infrastructure thinking.</p>
+      <div class="project-link-grid">
+        <a class="project-link-card" href="https://auraofintelligence.github.io/straddie-tenders-lab/" rel="noopener"><span>Tenders</span><strong>Straddie Tenders Lab</strong><p>Official-source watching, bid readiness, role clarity and local-capability pathways.</p></a>
+        <a class="project-link-card" href="https://auraofintelligence.github.io/ballow-road-sand-screen-hub/" rel="noopener"><span>Public space</span><strong>Ballow Road Sand & Screen Hub</strong><p>Public-space activation, youth roles, events, sport, screen culture and source trails.</p></a>
+        <a class="project-link-card" href="https://auraofintelligence.github.io/ready-set-co-op-trust-hub/" rel="noopener"><span>Trust</span><strong>Ready S.E.T. Co-op Trust Hub</strong><p>Practical work pathways, co-working, public/private boundaries and local support roles.</p></a>
+        <a class="project-link-card" href="https://auraofintelligence.github.io/quandamooka-country-events-engine/" rel="noopener"><span>Events</span><strong>Quandamooka Country Events Engine</strong><p>Event builders, approvals thinking, public notices, supply lanes and planning flows.</p></a>
+        <a class="project-link-card" href="https://auraofintelligence.github.io/amity-outdoor-fitness-grant/" rel="noopener"><span>Grant logic</span><strong>Amity Outdoor Fitness</strong><p>Grant-facing public infrastructure framing, evidence, site checks and support pathways.</p></a>
+        <a class="project-link-card" href="https://auraofintelligence.github.io/strange-but-true/community-ledger.html" rel="noopener"><span>Ledger</span><strong>Community Ledger</strong><p>The wider public project index remains available without importing every card into this tender page.</p></a>
+      </div>
     </section>
 
     <section class="section grid two">
@@ -1736,7 +1891,7 @@ def write_pages() -> None:
       ])}</article>
     </section>
     """
-    write("pages/strange-but-true-role.html", layout("pages/strange-but-true-role.html", "Strange But True possible role", "A plain boundary-aware outline of how Luke could help without stepping into technical certification or construction responsibility.", sbt))
+    write("pages/strange-but-true-role.html", layout("pages/strange-but-true-role.html", "Strange But True and Luke's role", "A selective, boundary-aware outline of how Luke can support the tender workspace without stepping into skatepark certification or construction responsibility.", sbt))
 
     boundaries = f"""
     <section class="section grid two">
@@ -1916,17 +2071,19 @@ def write_pages() -> None:
         ["BOQ/pricing confidence", "Tendered sum is heavily weighted and must be credible.", "Keep pricing private and VFG-led.", "VFG"],
         ["Role blur", "Luke can support drafting but cannot certify, price, engineer or act as contractor.", "Use role-boundary labels and specialist review gates.", "Joint"],
         ["Tender timing", "Returnables, site inspection, concept design, pricing and evidence may compress quickly.", "Use the task board and bid/no-bid gate.", "Joint"],
-        ["Public leakage", "A public repo could expose tender-sensitive material if unmanaged.", "No raw tender docs, prices, signatures or private details.", "Luke"],
+        ["Public leakage", "A public repo could expose tender-sensitive material if unmanaged.", "Source docs are published intentionally; prices, signatures, filled forms and private details stay out.", "Luke"],
         ["Environmental / koala habitat controls", "Adjacent vegetation and habitat controls may affect works.", "Confirm project brief requirements and site constraints.", "VFG / Specialist"],
       ])}
     </section>
     """
     write("pages/risk-and-assumptions.html", layout("pages/risk-and-assumptions.html", "Risks and assumptions", "A starter register for the assumptions and risks that should be checked before submission effort ramps up.", risks))
 
-    docs_page = """
+    docs_page = f"""
     <section class="section band">
-      <h2>Local source documents</h2>
-      <p>This register lists the tender files supplied locally and explains how they are used. It does not link to raw files because the public site should not republish the tender pack.</p>
+      <h2>Source tender downloads</h2>
+      <p>This register lists the tender files, explains how they are used, and links to the published source copies. The full pack is also available as a single ZIP download.</p>
+      <p><a class="button-link" href="../tender-documents/{esc(DOCUMENT_ZIP)}" download>Download full tender source pack ZIP</a></p>
+      <p>Keep filled returnables, signatures, prices, supplier quotes, private evidence and final submission material outside the public repo.</p>
     </section>
     <section class="section" data-docs-src="../data/docs.json">
       <p class="warning-box">Loading document register from data/docs.json...</p>
@@ -1976,6 +2133,44 @@ def write_pages() -> None:
     </section>
     """
     write("pages/submission-roadmap.html", layout("pages/submission-roadmap.html", "Submission roadmap", "A staged pathway from site visit through bid/no-bid, concept response, review and possible submission.", roadmap))
+
+    site_map_rows = []
+    for href, label in NAV:
+      page_href = f"../{href}"
+      site_map_rows.append([label, f"<a href=\"{esc(page_href)}\">Open page</a>"])
+    site_map = f"""
+    <section class="section band">
+      <h2>Quick routes</h2>
+      <p>Use this page when the navigation menu feels too small for the full workspace. It points to the main pages, the document downloads and the public repo surfaces.</p>
+      <div class="sbt-actions">
+        <a class="button-link" href="../tender-documents/{esc(DOCUMENT_ZIP)}" download>Download full tender source pack ZIP</a>
+        <a class="button-link secondary" href="../pages/document-register.html">Open document register</a>
+        <a class="button-link secondary" href="../sitemap.xml">Open sitemap.xml</a>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>All site pages</h2>
+      {table(["Page", "Link"], site_map_rows)}
+    </section>
+
+    <section class="section grid two">
+      <article class="card"><h3>Most useful starting points</h3>{list_items([
+        "Dashboard for the current working summary.",
+        "Document register for source downloads.",
+        "Site photos for actual tender-pack image evidence.",
+        "Questions register and task board for the next conversation.",
+        "Decision gate before any serious submission effort.",
+      ])}</article>
+      <article class="card"><h3>Public repo surfaces</h3>{list_items([
+        "GitHub Pages site: https://auraofintelligence.github.io/windemere-skate-bowl-tender-workspace/",
+        "GitHub repo: https://github.com/auraofintelligence/windemere-skate-bowl-tender-workspace",
+        "Machine sitemap: sitemap.xml at the repository root.",
+        "Source documents: tender-documents/ at the repository root.",
+      ])}</article>
+    </section>
+    """
+    write("pages/site-map.html", layout("pages/site-map.html", "Site map", "A plain navigation map for the tender workspace, source downloads, public repo links and key work paths.", site_map))
 
 
 def main() -> None:

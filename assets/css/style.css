@@ -321,6 +321,96 @@ a:focus {
   border: 1px solid var(--border);
 }
 
+.sbt-intro {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(280px, 1.1fr);
+  gap: clamp(1rem, 3vw, 2rem);
+  align-items: stretch;
+  background: #121c27;
+  color: var(--white);
+  border-radius: var(--radius);
+  padding: clamp(1.1rem, 3vw, 2rem);
+  box-shadow: var(--shadow);
+}
+
+.sbt-logo-panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 21rem;
+}
+
+.sbt-logo-panel img {
+  width: min(14rem, 70vw);
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  box-shadow: 0 16px 38px rgba(0, 0, 0, 0.28);
+}
+
+.sbt-intro h2 {
+  color: var(--white);
+  font-size: clamp(2rem, 4vw, 4rem);
+  line-height: 1;
+  margin: 0 0 1rem;
+}
+
+.sbt-intro p,
+.sbt-intro li {
+  color: #dce8ea;
+}
+
+.sbt-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  margin-top: 1rem;
+}
+
+.project-link-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.9rem;
+}
+
+.project-link-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  min-height: 13rem;
+  padding: 1rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--white);
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.project-link-card span {
+  width: fit-content;
+  padding: 0.2rem 0.45rem;
+  border-radius: 4px;
+  background: var(--teal-soft);
+  color: #124948;
+  font-size: 0.74rem;
+  font-weight: 800;
+}
+
+.project-link-card strong {
+  color: var(--navy);
+  font-size: 1.03rem;
+}
+
+.project-link-card p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.project-link-card:hover,
+.project-link-card:focus {
+  border-color: var(--teal);
+  box-shadow: 0 10px 28px rgba(16, 36, 51, 0.12);
+}
+
 .quick-status {
   display: flex;
   flex-wrap: wrap;
@@ -389,6 +479,7 @@ a:focus {
 
 .card-link,
 .button-link,
+.download-link,
 .pager-link {
   display: inline-flex;
   align-items: center;
@@ -406,12 +497,28 @@ a:focus {
 
 .card-link:hover,
 .button-link:hover,
+.download-link:hover,
 .pager-link:hover,
 .card-link:focus,
 .button-link:focus,
+.download-link:focus,
 .pager-link:focus {
   background: var(--navy);
   color: var(--white);
+}
+
+.button-link.secondary {
+  background: var(--navy);
+}
+
+.button-link.secondary:hover,
+.button-link.secondary:focus {
+  background: var(--teal);
+}
+
+.download-link {
+  margin-top: 0;
+  white-space: nowrap;
 }
 
 .badge {
@@ -618,6 +725,7 @@ tbody tr:hover {
 
 @media (max-width: 900px) {
   .hero-grid,
+  .sbt-intro,
   .split,
   .grid.two {
     grid-template-columns: 1fr;
@@ -627,6 +735,7 @@ tbody tr:hover {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .project-link-grid,
   .photo-grid,
   .image-rail {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -654,6 +763,7 @@ tbody tr:hover {
 
   .grid,
   .board,
+  .project-link-grid,
   .photo-grid,
   .image-rail {
     grid-template-columns: 1fr;

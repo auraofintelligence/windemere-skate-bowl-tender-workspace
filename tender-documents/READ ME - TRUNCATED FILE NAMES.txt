@@ -1,0 +1,8 @@
+*** READ ME - TRUNCATED FILE NAMES ***
+
+Some of the files uploaded have names that are too long to fit into a Zip file.
+
+These names have been truncated, with the original file name listed below.
+-----------
+Appendix_A-PDG-20842_CIP_Skate_Bowl-Windemere_Road_Park__Alexandra_Hills-Ow (1).pdf = Appendix_A-PDG-20842_CIP_Skate_Bowl-Windemere_Road_Park__Alexandra_Hills-Owners_Consent.pdf
+Appendix_B-2023_Redland_City_Council_Wayfinding_Signage_Manual_Core_Standar (2).pdf = Appendix_B-2023_Redland_City_Council_Wayfinding_Signage_Manual_Core_Standards-Version_B-February_2023.pdf

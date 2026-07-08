@@ -108,6 +108,7 @@
                 <th scope="col">Key notes</th>
                 <th scope="col">Used for</th>
                 <th scope="col">Public/private caution</th>
+                <th scope="col">Download</th>
               </tr>
             </thead>
             <tbody>
@@ -118,6 +119,7 @@
                   <td>${escapeHtml(row.notes)}</td>
                   <td>${escapeHtml(row.usedFor)}</td>
                   <td>${escapeHtml(row.caution)}</td>
+                  <td>${row.downloadPath ? `<a class="download-link" href="${escapeHtml(row.downloadPath)}" download>Download</a>` : ""}</td>
                 </tr>`).join("")}
             </tbody>
           </table>

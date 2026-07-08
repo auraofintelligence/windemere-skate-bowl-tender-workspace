@@ -1,11 +1,11 @@
 [
   {
     "id": "T01",
-    "title": "Confirm repo privacy and publication boundary",
-    "status": "To confirm",
+    "title": "Confirm repo publication boundary",
+    "status": "Ready",
     "owner": "Luke",
     "due": "Now",
-    "notes": "Public Pages is allowed, but raw tender files and private details stay out."
+    "notes": "Source tender files are public here by project direction; filled forms, prices and private details stay out."
   },
   {
     "id": "T02",

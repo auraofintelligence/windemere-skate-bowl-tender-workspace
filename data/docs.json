@@ -4,76 +4,95 @@
     "purpose": "Updates tender timing and site inspection details.",
     "notes": "Closing moved to 2:00 pm 6 August 2026. Mandatory site inspection moved to 10:00 am Wednesday 15 July 2026. RSVP by 2:00 pm Tuesday 14 July 2026.",
     "usedFor": "Dates, attendance, signed addendum task.",
-    "caution": "Do not republish raw PDF or signature page."
+    "caution": "Downloadable source document. Upload only blank/source copy, not a signed return copy.",
+    "downloadPath": "../tender-documents/%28Addendum%29_PDG-20842-1_Addendum_1.pdf"
   },
   {
     "file": "PDG-20842-1_ITT_Invitation_To_Tender.pdf",
     "purpose": "Invitation, tender rules, evaluation criteria and lodgement structure.",
     "notes": "Section A retained by tenderers. Section B deliverables become the tender offer.",
     "usedFor": "Tender overview, compliance matrix, returnables.",
-    "caution": "Summarise only. Do not publish full tender conditions."
+    "caution": "Downloadable source document. Site pages still use summary language for readability.",
+    "downloadPath": "../tender-documents/PDG-20842-1_ITT_Invitation_To_Tender.pdf"
   },
   {
     "file": "PDG-20842-1_Project_Brief.pdf",
     "purpose": "Technical project brief and design-and-construct scope.",
     "notes": "Includes staged design, RPEQ for-construction drawings, as-constructed and Form 16 pathway.",
     "usedFor": "Scope, CAD workflow, specialist boundaries.",
-    "caution": "Do not treat summaries as engineering advice."
+    "caution": "Downloadable source document. Summaries are not engineering advice.",
+    "downloadPath": "../tender-documents/PDG-20842-1_Project_Brief.pdf"
   },
   {
     "file": "PDG-20842-1_Section_B_Returnable_Schedule_Attachments.docx",
     "purpose": "Returnable schedules A-L to complete and lodge.",
     "notes": "Failure to provide required schedules may make a tender non-conforming.",
     "usedFor": "Returnables page and compliance matrix.",
-    "caution": "Do not publish filled forms, signatures, prices or private evidence."
+    "caution": "Blank/source schedule is downloadable. Filled forms, signatures and private evidence stay out.",
+    "downloadPath": "../tender-documents/PDG-20842-1_Section_B_Returnable_Schedule_Attachments.docx"
   },
   {
     "file": "PDG-20842-1_Bill_of_Quantities.xlsm",
     "purpose": "BOQ workbook for tendered sum structure.",
     "notes": "Use for structure only in this workspace. Pricing belongs outside the public site.",
     "usedFor": "Returnable H planning.",
-    "caution": "Never publish rates, totals or commercial assumptions."
+    "caution": "Blank/source workbook is downloadable. Completed prices, rates and totals stay out.",
+    "downloadPath": "../tender-documents/PDG-20842-1_Bill_of_Quantities.xlsm"
   },
   {
     "file": "Appendix_A-PDG-20842_CIP_Skate_Bowl-Windemere_Road_Park__Alexandra_Hills-Ow (1).pdf",
     "purpose": "Owner's consent / property-related appendix.",
     "notes": "Supports site authority context.",
     "usedFor": "Document register and planning context.",
-    "caution": "Do not publish full property documentation."
+    "caution": "Downloadable source document for tender context.",
+    "downloadPath": "../tender-documents/Appendix_A-PDG-20842_CIP_Skate_Bowl-Windemere_Road_Park__Alexandra_Hills-Ow%20%281%29.pdf"
   },
   {
     "file": "Appendix_B-2023_Redland_City_Council_Wayfinding_Signage_Manual_Core_Standar (2).pdf",
     "purpose": "Wayfinding signage core standards.",
     "notes": "Any signage concept should be RCC-style compliant, accessible, visible and non-hazardous.",
     "usedFor": "Concept design and signage notes.",
-    "caution": "Do not reproduce manual content heavily."
+    "caution": "Downloadable source document. Reuse in final tender material should stay source-faithful.",
+    "downloadPath": "../tender-documents/Appendix_B-2023_Redland_City_Council_Wayfinding_Signage_Manual_Core_Standar%20%282%29.pdf"
   },
   {
     "file": "Appendix_C-RCC_Skatepark_Audit_Jan_2026.pdf",
     "purpose": "Skatepark audit for Windemere Road Park.",
     "notes": "Condition rating 3 - Fair. Priority actions include cracks/wide joints over 5 mm, height irregularities over 3 mm and coping repairs.",
     "usedFor": "Repair priorities, site visit questions, concept options.",
-    "caution": "Do not convert audit notes into final design recommendations without VFG/specialist review."
+    "caution": "Downloadable source document. Do not turn audit notes into final design recommendations without VFG/specialist review.",
+    "downloadPath": "../tender-documents/Appendix_C-RCC_Skatepark_Audit_Jan_2026.pdf"
   },
   {
     "file": "Appendix_D-Site_Photos-02_June_2026.pdf",
     "purpose": "June 2026 site photo pack.",
     "notes": "Photos show water/pooling, debris, graffiti, cracking and existing shelter/fencing context.",
     "usedFor": "Drainage questions, site observations and public visual context.",
-    "caution": "Source PDF stays local; extracted web images are included in this repo by project direction."
+    "caution": "Downloadable source document. Extracted web images are also shown on the site photos page.",
+    "downloadPath": "../tender-documents/Appendix_D-Site_Photos-02_June_2026.pdf"
   },
   {
     "file": "Appendix_E-FBD-106_A_Fencing_Welded_Mesh_Fencing_&_Control_Fence.pdf",
     "purpose": "Welded mesh fencing / control fence detail.",
     "notes": "Use standard detail as source where fencing is relevant.",
     "usedFor": "Fencing and ancillary works planning.",
-    "caution": "Concept only until confirmed against standards and site."
+    "caution": "Downloadable source document. Concept only until confirmed against standards and site.",
+    "downloadPath": "../tender-documents/Appendix_E-FBD-106_A_Fencing_Welded_Mesh_Fencing_%26_Control_Fence.pdf"
   },
   {
     "file": "PDG-20842-1_AS4300-1995_General_Conditions.pdf",
     "purpose": "General contract conditions.",
     "notes": "Important for risk review and formal tender/legal review.",
     "usedFor": "Risk and assumptions.",
-    "caution": "Not legal advice. Do not publish full contract conditions."
+    "caution": "Downloadable source document. Not legal advice.",
+    "downloadPath": "../tender-documents/PDG-20842-1_AS4300-1995_General_Conditions.pdf"
+  },
+  {
+    "file": "READ ME - TRUNCATED FILE NAMES.txt",
+    "purpose": "VendorPanel package note.",
+    "notes": "Explains that some downloaded filenames may be truncated.",
+    "usedFor": "Download-pack housekeeping.",
+    "caution": "Downloadable package note.",
+    "downloadPath": "../tender-documents/READ%20ME%20-%20TRUNCATED%20FILE%20NAMES.txt"
   }
 ]

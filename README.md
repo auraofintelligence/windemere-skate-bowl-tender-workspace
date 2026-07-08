@@ -8,9 +8,11 @@ The workspace helps organise tender facts, role boundaries, questions, tasks, dr
 
 ## Public/private caution
 
-The GitHub Pages site may be public, so keep the raw tender PDFs, Word files, spreadsheets, prices, signatures, private contact details, filled returnables and commercial-in-confidence material out of this repository.
+The blank/source tender pack is included in `tender-documents/` for easy public review by project direction.
 
-The `.gitignore` file blocks common tender document formats and private folders. Keep source documents locally outside the repo unless the team has agreed they can be published.
+Keep filled returnables, prices, signatures, private contact details, supplier quotes, private evidence and commercial-in-confidence material out of this repository.
+
+The `.gitignore` file blocks private working folders while allowing the published source tender pack.
 
 ## Licence
 
@@ -18,13 +20,12 @@ All rights reserved. See `LICENSE.md`.
 
 ## Suggested workflow
 
-1. Add uploaded tender docs locally outside this repo.
-2. Review the website pages before the site visit.
-3. Capture site notes and update `data/questions.json` and `data/tasks.json`.
-4. Confirm role split and role boundaries.
-5. Decide bid / no-bid.
-6. Draft returnables and concept CAD.
-7. VFG and relevant specialists review before anything goes to Council.
+1. Review the website pages and `tender-documents/` source pack before the site visit.
+2. Capture site notes and update `data/questions.json` and `data/tasks.json`.
+3. Confirm role split and role boundaries.
+4. Decide bid / no-bid.
+5. Draft returnables and concept CAD in a private working area.
+6. VFG and relevant specialists review before anything goes to Council.
 
 ## Local preview
 

@@ -1,15 +1,13 @@
-# Local tender/source documents stay out of the public repo.
+# Private/local working folders stay out of the public repo.
 RequestDocs/
 source-docs/
 source_docs/
 private/
 _private/
-*.pdf
-*.docx
-*.xlsm
-*.xlsx
-*.xls
-*.zip
+
+# The public source tender pack is intentionally tracked here.
+!tender-documents/
+!tender-documents/**
 
 # Local tooling clutter.
 .DS_Store
