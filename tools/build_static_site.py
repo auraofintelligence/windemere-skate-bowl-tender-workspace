@@ -97,6 +97,7 @@ def layout(path: str, title: str, intro: str, body: str, *, body_class: str = ""
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{esc(title)} | {esc(SITE_TITLE)}</title>
   <meta name="description" content="Exploratory tender partnership workspace for {esc(TENDER_TITLE)}.">
+  <link rel="icon" href="{base}favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="{base}assets/css/style.css">
 </head>
 <body class="{class_attr.strip()}">
@@ -1102,6 +1103,13 @@ def write_data() -> None:
 
 
 def write_meta_files() -> None:
+    write("favicon.svg", """
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="SB">
+  <rect width="64" height="64" fill="#102433"/>
+  <rect x="8" y="8" width="48" height="48" fill="none" stroke="#c7ad7a" stroke-width="4"/>
+  <text x="32" y="39" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="700" fill="#ffffff">SB</text>
+</svg>
+""")
     write(".gitignore", r"""
 # Local tender/source documents stay out of the public repo.
 RequestDocs/
