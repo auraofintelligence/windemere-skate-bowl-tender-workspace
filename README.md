@@ -20,8 +20,8 @@ All rights reserved. See `LICENSE.md`.
 
 ## Suggested workflow
 
-1. Review the website pages and `tender-documents/` source pack before the site visit.
-2. Capture site notes and update `data/questions.json` and `data/tasks.json`.
+1. Review the website pages, `tender-documents/` source pack and 360 site record.
+2. Capture site-visit answers and update `data/questions.json` and `data/tasks.json`.
 3. Confirm role split and role boundaries.
 4. Decide bid / no-bid.
 5. Draft returnables and concept CAD in a private working area.
@@ -42,6 +42,17 @@ http://localhost:8000/
 ```
 
 The site is plain HTML, CSS and JavaScript. There is no frontend build step.
+
+## Rebuild the 360 site record
+
+When new GoPro equirectangular JPG files are added to `assets/img/GoPro360-site-visit/`, run:
+
+```powershell
+python tools/build_site_visit_360.py
+python tools/build_static_site.py
+```
+
+The first command creates lightweight viewer copies, thumbnails and the public photo manifest. The original JPG files remain available for full-resolution download.
 
 ## GitHub Pages
 

@@ -5,6 +5,9 @@ source_docs/
 private/
 _private/
 
+# Raw site-meeting recordings stay local until reviewed for publication.
+assets/site-audio/
+
 # The public source tender pack is intentionally tracked here.
 !tender-documents/
 !tender-documents/**

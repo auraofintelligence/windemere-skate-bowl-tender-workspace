@@ -16,6 +16,7 @@ NAV = [
     ("index.html", "Dashboard"),
     ("pages/tender-overview.html", "Tender overview"),
     ("pages/site-visit.html", "Site visit"),
+    ("pages/site-visit-360.html", "360 site record"),
     ("pages/site-photos.html", "Site photos"),
     ("pages/partnership.html", "Partnership"),
     ("pages/vfg-capability-map.html", "VFG capability"),
@@ -35,6 +36,40 @@ NAV = [
     ("pages/local-benefit.html", "Local benefit"),
     ("pages/submission-roadmap.html", "Roadmap"),
     ("pages/site-map.html", "Site map"),
+]
+
+NAV_GROUPS = [
+    ("Tender", [
+        ("pages/tender-overview.html", "Tender overview"),
+        ("pages/compliance-matrix.html", "Compliance matrix"),
+        ("pages/project-brief-coverage.html", "Brief coverage"),
+        ("pages/returnables.html", "Returnables"),
+        ("pages/document-register.html", "Documents"),
+        ("pages/risk-and-assumptions.html", "Risks and assumptions"),
+    ]),
+    ("Site evidence", [
+        ("pages/site-visit.html", "Site visit record"),
+        ("pages/site-visit-360.html", "360 site record"),
+        ("pages/site-photos.html", "Tender-pack photos"),
+        ("pages/questions-register.html", "Questions register"),
+    ]),
+    ("Bid build", [
+        ("pages/vfg-capability-map.html", "VFG capability"),
+        ("pages/concept-design-workspace.html", "Concept design"),
+        ("pages/cad-workflow.html", "CAD workflow"),
+        ("pages/local-benefit.html", "Local benefit"),
+        ("pages/submission-roadmap.html", "Submission roadmap"),
+    ]),
+    ("Team", [
+        ("pages/partnership.html", "Partnership"),
+        ("pages/strange-but-true-role.html", "Luke / Strange But True"),
+        ("pages/role-boundaries.html", "Role boundaries"),
+    ]),
+    ("Tracking", [
+        ("pages/task-board.html", "Task board"),
+        ("pages/decision-gate.html", "Decision gate"),
+        ("pages/back-and-forth-log.html", "Back-and-forth log"),
+    ]),
 ]
 
 site_photos = [
@@ -136,25 +171,43 @@ def base_for(path: str) -> str:
 
 
 def nav_html(current: str, base: str) -> str:
-    visible = NAV[:8]
-    extra = NAV
-    visible_links = []
-    for href, label in visible:
+    def nav_link(href: str, label: str, class_name: str = "") -> str:
         active = " aria-current=\"page\"" if href == current else ""
-        visible_links.append(f"<a href=\"{base}{href}\"{active}>{esc(label)}</a>")
-    extra_links = []
-    for href, label in extra:
-        active = " aria-current=\"page\"" if href == current else ""
-        extra_links.append(f"<a href=\"{base}{href}\"{active}>{esc(label)}</a>")
+        classes = f" class=\"{class_name}\"" if class_name else ""
+        return f"<a{classes} href=\"{base}{href}\"{active}>{esc(label)}</a>"
+
+    desktop_groups = []
+    mobile_groups = []
+    for group_label, links in NAV_GROUPS:
+        active_class = " has-current" if any(href == current for href, _label in links) else ""
+        group_links = "".join(nav_link(href, label) for href, label in links)
+        desktop_groups.append(f"""
+          <details class="nav-group{active_class}">
+            <summary>{esc(group_label)}</summary>
+            <div class="nav-group-panel">{group_links}</div>
+          </details>
+        """)
+        mobile_groups.append(f"""
+          <section class="nav-mobile-section">
+            <strong>{esc(group_label)}</strong>
+            <div>{group_links}</div>
+          </section>
+        """)
+
+    dashboard = nav_link("index.html", "Dashboard", "nav-direct")
+    site_map = nav_link("pages/site-map.html", "Site map", "nav-direct")
     return f"""
         <nav class="site-nav" aria-label="Primary">
-          <div class="nav-primary">
-            {''.join(visible_links)}
+          <div class="nav-desktop">
+            {dashboard}
+            {''.join(desktop_groups)}
+            {site_map}
           </div>
-          <details class="nav-more">
-            <summary>More pages</summary>
-            <div class="nav-more-panel">
-              {''.join(extra_links)}
+          <details class="nav-mobile">
+            <summary>Browse {len(NAV)} pages</summary>
+            <div class="nav-mobile-panel">
+              <div class="nav-mobile-direct">{dashboard}{site_map}</div>
+              {''.join(mobile_groups)}
             </div>
           </details>
         </nav>
@@ -175,7 +228,16 @@ def page_links(current: str, base: str) -> str:
     return f"<nav class=\"page-pager\" aria-label=\"Page sequence\">{''.join(links)}</nav>"
 
 
-def layout(path: str, title: str, intro: str, body: str, *, body_class: str = "") -> str:
+def layout(
+    path: str,
+    title: str,
+    intro: str,
+    body: str,
+    *,
+    body_class: str = "",
+    extra_head: str = "",
+    extra_scripts: str = "",
+) -> str:
     base = base_for(path)
     current = path
     class_attr = f" {body_class}" if body_class else ""
@@ -188,6 +250,7 @@ def layout(path: str, title: str, intro: str, body: str, *, body_class: str = ""
   <meta name="description" content="Exploratory tender partnership workspace for {esc(TENDER_TITLE)}.">
   <link rel="icon" href="{base}favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="{base}assets/css/style.css">
+  {extra_head}
 </head>
 <body class="{class_attr.strip()}">
   <a class="skip-link" href="#main">Skip to content</a>
@@ -224,6 +287,7 @@ def layout(path: str, title: str, intro: str, body: str, *, body_class: str = ""
     <p>{esc(SITE_TITLE)}. Not official Redland City Council material. Not VFG's final tender submission. All rights reserved.</p>
   </footer>
   <script src="{base}assets/js/app.js" defer></script>
+  {extra_scripts}
 </body>
 </html>"""
 
@@ -485,21 +549,19 @@ a:focus {
 
 .site-nav {
   margin-top: 1rem;
-  display: flex;
-  gap: 0.75rem;
-  align-items: flex-start;
-  flex-wrap: wrap;
+  position: relative;
 }
 
-.nav-primary,
-.nav-more-panel {
+.nav-desktop {
   display: flex;
   flex-wrap: wrap;
   gap: 0.45rem;
+  align-items: flex-start;
 }
 
-.site-nav a,
-.nav-more summary {
+.nav-desktop > a,
+.nav-group > summary,
+.nav-mobile > summary {
   color: var(--white);
   text-decoration: none;
   border: 1px solid rgba(255, 255, 255, 0.2);
@@ -511,36 +573,86 @@ a:focus {
   background: rgba(255, 255, 255, 0.06);
 }
 
-.site-nav a[aria-current="page"] {
+.nav-desktop > a[aria-current="page"],
+.nav-group.has-current > summary,
+.nav-mobile-section a[aria-current="page"],
+.nav-mobile-direct a[aria-current="page"] {
   background: var(--sand);
   color: var(--navy);
   border-color: var(--sand);
   font-weight: 700;
 }
 
-.nav-more {
+.nav-group {
   position: relative;
 }
 
-.nav-more summary {
+.nav-group > summary,
+.nav-mobile > summary {
   cursor: pointer;
   list-style: none;
 }
 
-.nav-more summary::-webkit-details-marker {
+.nav-group > summary::-webkit-details-marker,
+.nav-mobile > summary::-webkit-details-marker {
   display: none;
 }
 
-.nav-more-panel {
+.nav-group > summary::after,
+.nav-mobile > summary::after {
+  content: "+";
+  margin-left: 0.5rem;
+  color: #b8ced0;
+  font-weight: 900;
+}
+
+.nav-group[open] > summary::after,
+.nav-mobile[open] > summary::after {
+  content: "-";
+}
+
+.nav-group-panel {
   position: absolute;
-  right: 0;
-  top: 2.8rem;
-  z-index: 3;
-  min-width: min(28rem, 90vw);
-  padding: 0.75rem;
+  left: 0;
+  top: calc(100% + 0.4rem);
+  z-index: 8;
+  display: grid;
+  gap: 0.35rem;
+  width: 18rem;
+  padding: 0.55rem;
   background: var(--navy-2);
   border: 1px solid rgba(255, 255, 255, 0.22);
   box-shadow: var(--shadow);
+}
+
+.nav-group:nth-last-of-type(-n + 2) .nav-group-panel {
+  right: 0;
+  left: auto;
+}
+
+.nav-group-panel a,
+.nav-mobile-panel a {
+  display: flex;
+  align-items: center;
+  min-height: 2.45rem;
+  padding: 0.5rem 0.65rem;
+  border: 1px solid transparent;
+  color: #e5eeee;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+
+.nav-group-panel a:hover,
+.nav-group-panel a:focus-visible,
+.nav-mobile-panel a:hover,
+.nav-mobile-panel a:focus-visible {
+  border-color: rgba(255, 255, 255, 0.24);
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--white);
+}
+
+.nav-mobile {
+  display: none;
 }
 
 .caution-banner {
@@ -1006,12 +1118,12 @@ table {
 
 .docs-table th:nth-child(5),
 .docs-table td:nth-child(5) {
-  width: 17%;
+  width: 15%;
 }
 
 .docs-table th:nth-child(6),
 .docs-table td:nth-child(6) {
-  width: 8%;
+  width: 10%;
 }
 
 .docs-table .download-cell {
@@ -1022,7 +1134,8 @@ table {
   display: inline-flex;
   width: min(100%, 7rem);
   justify-content: center;
-  white-space: normal;
+  white-space: nowrap;
+  overflow-wrap: normal;
   line-height: 1.15;
   padding: 0.45rem 0.5rem;
   font-size: 0.84rem;
@@ -1177,9 +1290,58 @@ tbody tr:hover {
     flex-direction: column;
   }
 
-  .nav-more-panel {
-    left: 0;
-    right: auto;
+}
+
+@media (max-width: 760px) {
+  .nav-desktop {
+    display: none;
+  }
+
+  .nav-mobile {
+    display: block;
+    width: 100%;
+  }
+
+  .nav-mobile > summary {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .nav-mobile-panel {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.65rem;
+    margin-top: 0.5rem;
+    padding: 0.7rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: var(--navy-2);
+  }
+
+  .nav-mobile-direct {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.4rem;
+  }
+
+  .nav-mobile-section {
+    min-width: 0;
+    padding: 0.45rem;
+    border-top: 3px solid var(--teal);
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  .nav-mobile-section strong {
+    display: block;
+    margin: 0.15rem 0.2rem 0.4rem;
+    color: #c8dddd;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+  }
+
+  .nav-mobile-section div {
+    display: grid;
+    gap: 0.25rem;
   }
 }
 
@@ -1253,20 +1415,12 @@ tbody tr:hover {
     width: 100%;
   }
 
-  .nav-primary {
-    display: none;
+  .nav-mobile-panel {
+    grid-template-columns: 1fr;
   }
 
-  .site-nav a,
-  .nav-more,
-  .nav-more summary {
-    width: 100%;
-  }
-
-  .nav-more-panel {
-    position: static;
-    min-width: 100%;
-    margin-top: 0.5rem;
+  .nav-mobile-direct {
+    grid-template-columns: 1fr;
   }
 
   .page-pager {
@@ -1329,6 +1483,26 @@ tbody tr:hover {
   if (topButton) {
     topButton.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
   }
+
+  const navGroups = [...document.querySelectorAll(".nav-group")];
+  navGroups.forEach((group) => {
+    group.addEventListener("toggle", () => {
+      if (!group.open) return;
+      navGroups.forEach((other) => {
+        if (other !== group) other.open = false;
+      });
+    });
+  });
+
+  document.addEventListener("click", (event) => {
+    if (event.target.closest(".site-nav")) return;
+    navGroups.forEach((group) => { group.open = false; });
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key !== "Escape") return;
+    navGroups.forEach((group) => { group.open = false; });
+  });
 
   const statusClass = (status) => {
     const lower = String(status || "").toLowerCase();
@@ -1566,8 +1740,8 @@ All rights reserved. See `LICENSE.md`.
 
 ## Suggested workflow
 
-1. Review the website pages and `tender-documents/` source pack before the site visit.
-2. Capture site notes and update `data/questions.json` and `data/tasks.json`.
+1. Review the website pages, `tender-documents/` source pack and 360 site record.
+2. Capture site-visit answers and update `data/questions.json` and `data/tasks.json`.
 3. Confirm role split and role boundaries.
 4. Decide bid / no-bid.
 5. Draft returnables and concept CAD in a private working area.
@@ -1588,6 +1762,17 @@ http://localhost:8000/
 ```
 
 The site is plain HTML, CSS and JavaScript. There is no frontend build step.
+
+## Rebuild the 360 site record
+
+When new GoPro equirectangular JPG files are added to `assets/img/GoPro360-site-visit/`, run:
+
+```powershell
+python tools/build_site_visit_360.py
+python tools/build_static_site.py
+```
+
+The first command creates lightweight viewer copies, thumbnails and the public photo manifest. The original JPG files remain available for full-resolution download.
 
 ## GitHub Pages
 
@@ -1747,7 +1932,7 @@ def write_pages() -> None:
       <div class="grid">
         {card("Tender snapshot", "PDG-20842-1 asks for design-and-construct refurbishment of the Windemere Road Park skate bowl, including repair, new elements, ancillary works, certification and management plans.", "Tender fact", "pages/tender-overview.html")}
         {card("Project Brief coverage", "The first audit says the workspace covers the tender skeleton, but several Project Brief controls still need a stronger register or VFG/specialist confirmation.", "New audit", "pages/project-brief-coverage.html")}
-        {card("Site visit next step", "Working assumption: mandatory site inspection at 10:00 am Wednesday 15 July 2026. RSVP by 2:00 pm Tuesday 14 July 2026.", "To confirm", "pages/site-visit.html")}
+        {card("Site visit record", "The mandatory inspection was attended on 15 July 2026. Ten geotagged GoPro 360 captures now record the bowls, surfaces, fencing, shelter and surrounding park.", "New field evidence", "pages/site-visit-360.html")}
         {card("Actual site photos", "Appendix D photos are now included as web images so drainage, cracking, debris, shelter and fencing context can be reviewed directly.", "Source imagery", "pages/site-photos.html")}
         {card("Partnership status", "Luke, Paolo and Kieran are testing fit. The workspace should help the team proceed, pause or no-bid respectfully.", "Exploratory", "pages/partnership.html")}
         {card("Decision gate", "Proceed only if VFG can lead the technical/design/build response and the specialist pathway is credible.", "Decision point", "pages/decision-gate.html")}
@@ -1755,7 +1940,7 @@ def write_pages() -> None:
         {card("Luke possible contribution", "Tender narrative, information design, role clarity, local benefit framing, task tracking and concept drafting from supplied intent.", "Possible role", "pages/strange-but-true-role.html")}
         {card("Key tender risks", "Certification pathway, BOQ/pricing, drainage, role boundaries, non-conforming returnables and contract risk need early attention.", "Open risk", "pages/risk-and-assumptions.html")}
         {card("Open questions", "Seed questions are ready for the site visit and can be edited in data/questions.json.", "Register", "pages/questions-register.html")}
-        {card("Next actions", "Confirm attendance, collect VFG evidence, review BOQ structure, map returnables and decide whether the partnership should bid.", "Task board", "pages/task-board.html")}
+        {card("Next actions", "Review the site-visit evidence, capture VFG repair and concept notes, collect capability evidence, review the BOQ structure and decide whether the partnership should bid.", "Task board", "pages/task-board.html")}
       </div>
     </section>
 
@@ -1838,11 +2023,12 @@ def write_pages() -> None:
     site_questions = [q["question"] for q in questions]
     site_visit = f"""
     <section class="section band">
-      <h2>Printable meeting agenda</h2>
-      <p><strong>Purpose:</strong> decide whether there is a realistic tender partnership. The tone should be practical, open and no pressure.</p>
-      <p><strong>Attendees:</strong> Luke Hayes / Strange But True, Paolo, Kieran / VFG Skateparks.</p>
-      <p><strong>Working assumption:</strong> mandatory site inspection at Windemere Road Park, 42-46 Windemere Road, Alexandra Hills QLD 4161, at 10:00 am Wednesday 15 July 2026. Confirm attendance before relying on this.</p>
-      <div class="label-strip">{badge("Print friendly", "gum")}{badge("Working assumption", "warning")}{badge("RSVP to confirm", "dark")}</div>
+      <h2>Inspection record</h2>
+      <p><strong>Purpose:</strong> test the site conditions, repair questions and partnership fit against the real place.</p>
+      <p><strong>Recorded event:</strong> the mandatory site inspection at Windemere Road Park, 42-46 Windemere Road, Alexandra Hills QLD 4161, was attended on Wednesday 15 July 2026.</p>
+      <p><strong>Field imagery:</strong> ten GoPro 360 photographs were captured between 9:12 am and 9:14 am before the 10:00 am inspection. Camera GPS is useful for orientation but is not survey-grade.</p>
+      <div class="label-strip">{badge("Inspection attended", "gum")}{badge("10 new 360 views", "dark")}{badge("Not survey-grade", "warning")}</div>
+      <p><a class="button-link" href="site-visit-360.html">Open the 360 site record</a></p>
     </section>
 
     <section class="section">
@@ -1859,7 +2045,79 @@ def write_pages() -> None:
       <article class="card"><h3>Decisions</h3><p>Proceed, pause or no-bid. Confirm who owns each next action and who must review it.</p></article>
     </section>
     """
-    write("pages/site-visit.html", layout("pages/site-visit.html", "Site visit agenda", "A printable agenda and question set for the mandatory site inspection and the first real partnership conversation.", site_visit))
+    write("pages/site-visit.html", layout("pages/site-visit.html", "Site visit record", "The mandatory inspection record, field questions and follow-up prompts for the exploratory tender partnership.", site_visit))
+
+    site_visit_360 = f"""
+    <section class="site-360-experience" data-site-360 data-source="../data/site-visit-360.json">
+      <header class="site-360-toolbar">
+        <div class="site-360-title-block">
+          <span data-view-count>View 01 of 10</span>
+          <strong data-view-title>Windemere site view 01</strong>
+        </div>
+        <div class="site-360-step-controls" aria-label="Panorama selection">
+          <button class="site-360-button" type="button" data-previous-view>Previous</button>
+          <button class="site-360-button" type="button" data-next-view>Next</button>
+        </div>
+      </header>
+
+      <div class="site-360-stage" data-sphere-stage aria-label="Interactive 360 site photograph">
+        <div class="site-360-loading" data-viewer-loading role="status">Loading 360 view...</div>
+      </div>
+
+      <footer class="site-360-footer">
+        <div class="site-360-meta">
+          <span data-capture-time>15 July 2026</span>
+          <a data-location-link target="_blank" rel="noopener noreferrer">Camera GPS</a>
+          <span>5760 x 2880 original</span>
+        </div>
+        <div class="site-360-actions">
+          <button class="site-360-button primary" type="button" data-save-view>Save view PNG</button>
+          <button class="site-360-button" type="button" data-copy-view>Copy view reference</button>
+          <a class="site-360-button" data-download-original download>Download original</a>
+        </div>
+      </footer>
+      <p class="site-360-status" data-viewer-status aria-live="polite">Preparing site record...</p>
+    </section>
+
+    <section class="site-360-index section" aria-label="360 capture index">
+      <div class="site-360-trail-panel">
+        <div>
+          <p class="kicker">Camera GPS / not survey-grade</p>
+          <h2>Capture trail</h2>
+          <p>Ten positions around the existing bowls, recorded immediately before the mandatory inspection.</p>
+        </div>
+        <div class="site-360-trail" data-capture-trail aria-label="Relative GPS capture trail"></div>
+      </div>
+      <div class="site-360-thumbnails" data-view-thumbnails aria-label="360 photograph thumbnails"></div>
+    </section>
+
+    <section class="section band tint">
+      <h2>Field evidence boundary</h2>
+      <p>These photographs are a visual record of conditions seen on 15 July 2026. They help with tender questions and concept discussion, but they do not replace survey, service locating, structural inspection, engineering advice or the tender documents.</p>
+      <details class="site-360-flat-details">
+        <summary>Open selected equirectangular strip</summary>
+        <div class="site-360-flat-strip"><img data-flat-view alt="Selected Windemere 360 photograph as a flat equirectangular strip"></div>
+      </details>
+    </section>
+    """
+    write(
+        "pages/site-visit-360.html",
+        layout(
+            "pages/site-visit-360.html",
+            "360 site record",
+            "A geotagged, look-around record captured at Windemere Road Park on the morning of the mandatory tender inspection, 15 July 2026.",
+            site_visit_360,
+            body_class="site-360-page",
+            extra_head="""
+  <link rel="stylesheet" href="../assets/vendor/pannellum/pannellum.css">
+  <link rel="stylesheet" href="../assets/css/site-visit-360.css">
+            """.strip(),
+            extra_scripts="""
+  <script src="../assets/vendor/pannellum/pannellum.js"></script>
+  <script src="../assets/js/site-visit-360.js" defer></script>
+            """.strip(),
+        ),
+    )
 
     site_photos_page = f"""
     <section class="section band">
@@ -2366,6 +2624,7 @@ def write_pages() -> None:
       <article class="card"><h3>Most useful starting points</h3>{list_items([
         "Dashboard for the current working summary.",
         "Document register for source downloads.",
+        "360 site record for the 15 July 2026 inspection imagery.",
         "Site photos for actual tender-pack image evidence.",
         "Questions register and task board for the next conversation.",
         "Decision gate before any serious submission effort.",

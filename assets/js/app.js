@@ -4,6 +4,26 @@
     topButton.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
   }
 
+  const navGroups = [...document.querySelectorAll(".nav-group")];
+  navGroups.forEach((group) => {
+    group.addEventListener("toggle", () => {
+      if (!group.open) return;
+      navGroups.forEach((other) => {
+        if (other !== group) other.open = false;
+      });
+    });
+  });
+
+  document.addEventListener("click", (event) => {
+    if (event.target.closest(".site-nav")) return;
+    navGroups.forEach((group) => { group.open = false; });
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key !== "Escape") return;
+    navGroups.forEach((group) => { group.open = false; });
+  });
+
   const statusClass = (status) => {
     const lower = String(status || "").toLowerCase();
     if (lower.includes("specialist") || lower.includes("parked")) return "warning";
