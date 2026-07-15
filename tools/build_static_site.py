@@ -2113,11 +2113,11 @@ def write_pages() -> None:
             body_class="site-360-page",
             extra_head="""
   <link rel="stylesheet" href="../assets/vendor/pannellum/pannellum.css">
-  <link rel="stylesheet" href="../assets/css/site-visit-360.css">
+  <link rel="stylesheet" href="../assets/css/site-visit-360.css?v=20260715b">
             """.strip(),
             extra_scripts="""
   <script src="../assets/vendor/pannellum/pannellum.js"></script>
-  <script src="../assets/js/site-visit-360.js" defer></script>
+  <script src="../assets/js/site-visit-360.js?v=20260715b" defer></script>
             """.strip(),
         ),
     )
