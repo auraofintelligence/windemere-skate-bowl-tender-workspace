@@ -1685,6 +1685,9 @@ source_docs/
 private/
 _private/
 
+# Raw site-meeting recordings stay local until reviewed for publication.
+assets/site-audio/
+
 # The public source tender pack is intentionally tracked here.
 !tender-documents/
 !tender-documents/**
@@ -2083,10 +2086,10 @@ def write_pages() -> None:
       <div class="site-360-trail-panel">
         <div>
           <p class="kicker">Camera GPS / not survey-grade</p>
-          <h2>Capture trail</h2>
-          <p>Ten positions around the existing bowls, recorded immediately before the mandatory inspection.</p>
+          <h2>Capture map</h2>
+          <p>Ten camera-GPS positions around the existing bowls, recorded immediately before the mandatory inspection.</p>
         </div>
-        <div class="site-360-trail" data-capture-trail aria-label="Relative GPS capture trail"></div>
+        <div class="site-360-trail" data-capture-trail aria-label="Google Maps satellite screenshot with relative camera-GPS photo points"></div>
       </div>
       <div class="site-360-thumbnails" data-view-thumbnails aria-label="360 photograph thumbnails"></div>
     </section>

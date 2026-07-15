@@ -51,7 +51,9 @@
   }
 
   function numericState(params, key, fallback) {
-    const value = Number(params.get(key));
+    const rawValue = params.get(key);
+    if (rawValue === null || rawValue.trim() === "") return fallback;
+    const value = Number(rawValue);
     return Number.isFinite(value) ? value : fallback;
   }
 
@@ -59,7 +61,7 @@
     return {
       yaw: sphereViewer?.getYaw?.() ?? 0,
       pitch: sphereViewer?.getPitch?.() ?? -4,
-      hfov: sphereViewer?.getHfov?.() ?? 95,
+      hfov: sphereViewer?.getHfov?.() ?? 120,
     };
   }
 
@@ -151,7 +153,7 @@
     });
   }
 
-  function setActive(index, orientation = { yaw: 0, pitch: -4, hfov: 95 }) {
+  function setActive(index, orientation = { yaw: 0, pitch: -4, hfov: 120 }) {
     activeIndex = Math.max(0, Math.min(points.length - 1, index));
     const point = points[activeIndex];
 
@@ -220,8 +222,8 @@
 
     return mapped.map((point) => ({
       point,
-      x: 10 + ((point.longitude - minLon) / lonRange) * 80,
-      y: 10 + ((maxLat - point.latitude) / latRange) * 80,
+      x: 24 + ((point.longitude - minLon) / lonRange) * 36,
+      y: 18 + ((maxLat - point.latitude) / latRange) * 38,
     }));
   }
 
@@ -232,15 +234,6 @@
       trail.textContent = "No camera GPS was recorded.";
       return;
     }
-
-    const svgNamespace = "http://www.w3.org/2000/svg";
-    const svg = document.createElementNS(svgNamespace, "svg");
-    svg.setAttribute("viewBox", "0 0 100 100");
-    svg.setAttribute("aria-hidden", "true");
-    const path = document.createElementNS(svgNamespace, "path");
-    path.setAttribute("d", positions.map((position, index) => `${index ? "L" : "M"} ${position.x} ${position.y}`).join(" "));
-    svg.append(path);
-    trail.append(svg);
 
     positions.forEach(({ point, x, y }) => {
       const button = document.createElement("button");
@@ -337,7 +330,7 @@
       const orientation = {
         yaw: numericState(params, "yaw", 0),
         pitch: numericState(params, "pitch", -4),
-        hfov: numericState(params, "hfov", 95),
+        hfov: numericState(params, "hfov", 120),
       };
       setActive(requestedIndex >= 0 ? requestedIndex : 0, orientation);
     })
